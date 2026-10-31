@@ -9,15 +9,16 @@
  *    http://localhost:8080/api
  *
  * 2. PRODUCTION / RENDER DEPLOYMENT:
- *    - Update defaultProductionApiUrl below with your deployed Render backend service URL.
- *      (e.g., 'https://rpms-backend.onrender.com/api')
- *    - Or run in the browser console on your deployed site:
- *      setRpmsApiUrl('https://rpms-backend.onrender.com/api')
+ *    Defaults to the live deployed Render backend service:
+ *    https://rpms-backend-77rt.onrender.com/api
+ *
+ *    You can also dynamically override this URL at runtime in your browser console:
+ *    setRpmsApiUrl('https://rpms-backend-77rt.onrender.com/api')
  */
 
 (function () {
   const defaultLocalApiUrl = 'http://localhost:8080/api';
-  const defaultProductionApiUrl = 'https://rpms-backend.onrender.com/api';
+  const defaultProductionApiUrl = 'https://rpms-backend-77rt.onrender.com/api';
 
   const isLocalHost =
     !window.location.hostname ||

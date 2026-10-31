@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .register-card {
+      width: 100%;
+      max-width: 520px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+      padding: 32px 36px;
+      margin: 24px auto;
+    }
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 540px) {
+      .form-row-2 {
+        grid-template-columns: 1fr;
+      }
+      .register-card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body class="login-body">
+  <div class="register-card">
+    <div class="login-header">
+      <img src="images/logo.png" alt="Kiran Academy Logo" class="login-logo">
+      <h1 class="login-title">Create an Account</h1>
+      <p class="login-subtitle">Recruitment &amp; Placement Management System</p>
+      <div class="login-auth-note">Candidate &amp; Staff Registration</div>
+    </div>
+
+    <form class="login-form" id="registerForm" autocomplete="on">
+      <div class="form-group">
+        <label for="fullName" class="form-label">Full Name <span class="req">*</span></label>
+        <input type="text" id="fullName" name="fullName" class="form-control"
+          placeholder="e.g. Rahul Sharma" autocomplete="name" required autofocus>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" class="form-control"
+            placeholder="e.g. rahul.sharma@example.com" autocomplete="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone / Mobile</label>
+          <input type="tel" id="phone" name="phone" class="form-control"
+            placeholder="e.g. 9876543210" autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="role" class="form-label">Account Type <span class="req">*</span></label>
+        <select id="role" name="role" class="form-control" required>
+          <option value="CANDIDATE" selected>Candidate (Placement Applicant)</option>
+          <option value="PLACEMENT_OFFICER">Placement Officer (Staff Approval Required)</option>
+          <option value="INTERVIEWER">Interviewer / Evaluator (Staff Approval Required)</option>
+        </select>
+        <div class="form-hint">Staff accounts require administrator verification prior to activation.</div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label for="password" class="form-label">Password <span class="req">*</span></label>
+          <div class="password-input-wrap">
+            <input type="password" id="password" name="password" class="form-control"
+              placeholder="Min. 8 characters" autocomplete="new-password" required>
+            <button type="button" class="password-toggle-btn" id="togglePasswordBtn" title="Toggle password visibility">👁️</button>
+          </div>
+          <div class="form-hint" id="passwordHint">At least 8 chars, 1 letter, 1 number</div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm Password <span class="req">*</span></label>
+          <div class="password-input-wrap">
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+              placeholder="Re-enter password" autocomplete="new-password" required>
+            <button type="button" class="password-toggle-btn" id="toggleConfirmPasswordBtn" title="Toggle password visibility">👁️</button>
+          </div>
+          <div class="form-hint" id="matchHint"></div>
+        </div>
+      </div>
+
+      <div id="register-error-msg"
+        style="display:none; background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; padding:10px 14px; border-radius:6px; margin-top:4px; font-size:13px; line-height:1.4;">
+      </div>
+
+      <div id="register-success-msg"
+        style="display:none; background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; padding:12px 14px; border-radius:6px; margin-top:4px; font-size:13px; line-height:1.4;">
+      </div>
+
+      <div class="login-actions" style="margin-top:12px;">
+        <button type="submit" id="registerBtn" class="btn btn-primary">Create Account</button>
+      </div>
+
+      <div class="login-register-row">
+        Already have an account? <a href="login.html">Sign In</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    // Password toggles
+    function setupToggle(btnId, inputId) {
+      const btn = document.getElementById(btnId);
+      const input = document.getElementById(inputId);
+      btn.addEventListener('click', () => {
+        const isPwd = input.type === 'password';
+        input.type = isPwd ? 'text' : 'password';
+        btn.textContent = isPwd ? '🙈' : '👁️';
+      });
+    }
+    setupToggle('togglePasswordBtn', 'password');
+    setupToggle('toggleConfirmPasswordBtn', 'confirmPassword');
+
+    // Real-time password confirmation check
+    const pwdInput = document.getElementById('password');
+    const confirmInput = document.getElementById('confirmPassword');
+    const matchHint = document.getElementById('matchHint');
+
+    function checkMatch() {
+      if (!confirmInput.value) {
+        matchHint.textContent = '';
+        return;
+      }
+      if (pwdInput.value === confirmInput.value) {
+        matchHint.textContent = '✓ Passwords match';
+        matchHint.style.color = '#059669';
+      } else {
+        matchHint.textContent = '✗ Passwords do not match';
+        matchHint.style.color = '#dc2626';
+      }
+    }
+    confirmInput.addEventListener('input', checkMatch);
+    pwdInput.addEventListener('input', checkMatch);
+
+    // Registration form submit
+    document.getElementById('registerForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const errBox = document.getElementById('register-error-msg');
+      const succBox = document.getElementById('register-success-msg');
+      const btn = document.getElementById('registerBtn');
+
+      errBox.style.display = 'none';
+      succBox.style.display = 'none';
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const role = document.getElementById('role').value;
+      const password = pwdInput.value;
+      const confirmPassword = confirmInput.value;
+
+      // Basic client validation
+      if (password.length < 8) {
+        errBox.textContent = 'Password must be at least 8 characters long.';
+        errBox.style.display = 'block';
+        return;
+      }
+      if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) {
+        errBox.textContent = 'Password must contain at least one letter and one number.';
+        errBox.style.display = 'block';
+        return;
+      }
+      if (password !== confirmPassword) {
+        errBox.textContent = 'Passwords do not match.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Creating Account...';
+
+      try {
+        const res = await Api.register({
+          fullName,
+          email,
+          phone,
+          role,
+          password,
+          confirmPassword
+        });
+
+        succBox.textContent = res.message || 'Registration successful! Redirecting to sign in...';
+        succBox.style.display = 'block';
+        showNotification('Registration successful! Redirecting to sign in...', 'success');
+
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1500);
+      } catch (err) {
+        errBox.textContent = err.message || 'Registration failed. Please check your details.';
+        errBox.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+      }
+    });
+  </script>
+</body>
+
+</html>

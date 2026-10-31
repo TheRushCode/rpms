@@ -13,82 +13,163 @@
     <div class="login-header">
       <img src="images/logo.png" alt="Kiran Academy Logo" class="login-logo">
       <h1 class="login-title">Recruitment & Placement Management System</h1>
-      <p class="login-subtitle">Technology-Neutral HTML/CSS Prototype</p>
-      <div class="login-auth-note">Authorized users only</div>
+      <p class="login-subtitle">Campus & Corporate Placement Cell</p>
+      <div class="login-auth-note">Sign in to your account</div>
     </div>
 
-    <!-- Sample Display Data: Username: recruiter@demo.com | Role: Recruiter -->
-    <div class="sample-display-box"
-      style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:8px 12px; margin-bottom:18px; font-size:12px; color:#1e40af;">
-      <strong>Sample Display Data:</strong> Username: recruiter@demo.com | Role: Recruiter
-    </div>
-
-    <form class="login-form" action="dashboard.html" method="get">
+    <form class="login-form" id="loginForm" autocomplete="on">
       <div class="form-group">
-        <label for="username" class="form-label">Username / Email <span class="req">*</span></label>
-        <input type="text" id="username" name="username" class="form-control" value="admin"
-          placeholder="Enter username or email" autocomplete="username" required>
+        <label for="username" class="form-label">Username or Email <span class="req">*</span></label>
+        <input type="text" id="username" name="username" class="form-control"
+          placeholder="e.g. admin or your.email@example.com" autocomplete="username" required autofocus>
       </div>
 
       <div class="form-group">
         <label for="password" class="form-label">Password <span class="req">*</span></label>
-        <input type="password" id="password" name="password" class="form-control" value="••••••••••"
-          placeholder="Enter password" required>
-      </div>
-
-      <div class="form-group">
-        <label for="role" class="form-label">Role <span class="req">*</span></label>
-        <select id="role" name="role" class="form-control" required>
-          <option value="">-- Select Role --</option>
-          <option value="Admin">Admin</option>
-          <option value="Recruiter" selected>Recruiter</option>
-          <option value="Placement Officer">Placement Officer</option>
-        </select>
+        <div class="password-input-wrap">
+          <input type="password" id="password" name="password" class="form-control"
+            placeholder="Enter your password" autocomplete="current-password" required>
+          <button type="button" class="password-toggle-btn" id="togglePasswordBtn" title="Show / Hide Password" aria-label="Toggle password visibility">
+            👁️
+          </button>
+        </div>
       </div>
 
       <div class="login-extra-row">
-        <a href="#forgot-password" class="forgot-link">Forgot Password?</a>
+        <a href="#forgot-password" id="forgotPasswordLink" class="forgot-link">Forgot Password?</a>
       </div>
 
       <div id="login-error-msg"
-        style="display:none; background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; padding:8px 12px; border-radius:6px; margin-bottom:12px; font-size:13px;">
+        style="display:none; background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; padding:10px 14px; border-radius:6px; margin-bottom:8px; font-size:13px; line-height:1.4;">
       </div>
 
       <div class="login-actions">
-        <button type="submit" id="loginBtn" class="btn btn-primary">Login</button>
-        <button type="reset" class="btn btn-secondary">Reset</button>
+        <button type="submit" id="loginBtn" class="btn btn-primary">Sign In</button>
+      </div>
+
+      <div class="login-register-row">
+        New to Kiran Academy RPMS? <a href="register.html">Create an Account</a>
       </div>
     </form>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotPasswordModal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 style="font-size:18px; font-weight:700; color:var(--primary-color); margin:0;">Reset Password</h3>
+        <button type="button" id="closeForgotModal" style="background:transparent; border:none; font-size:20px; cursor:pointer; color:#64748b;">&times;</button>
+      </div>
+      <p style="font-size:13px; color:#64748b; margin-bottom:18px;">
+        Enter your registered email address. We will verify your account and provide reset instructions.
+      </p>
+      <form id="forgotPasswordForm">
+        <div class="form-group" style="margin-bottom:16px;">
+          <label for="forgotEmail" class="form-label">Email Address <span class="req">*</span></label>
+          <input type="email" id="forgotEmail" class="form-control" placeholder="user@example.com" required>
+        </div>
+        <div id="forgot-status-msg" style="display:none; padding:10px 12px; border-radius:6px; margin-bottom:14px; font-size:13px;"></div>
+        <div style="display:flex; gap:10px; justify-content:flex-end;">
+          <button type="button" id="cancelForgotBtn" class="btn btn-secondary">Cancel</button>
+          <button type="submit" id="submitForgotBtn" class="btn btn-primary">Send Instructions</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script src="js/config.js"></script>
   <script src="js/api.js"></script>
   <script>
-    document.querySelector('.login-form').addEventListener('submit', async function (e) {
+    // Password visibility toggle
+    const toggleBtn = document.getElementById('togglePasswordBtn');
+    const pwdInput = document.getElementById('password');
+    toggleBtn.addEventListener('click', () => {
+      const isPwd = pwdInput.type === 'password';
+      pwdInput.type = isPwd ? 'text' : 'password';
+      toggleBtn.textContent = isPwd ? '🙈' : '👁️';
+    });
+
+    // Login submission
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
       e.preventDefault();
       const errBox = document.getElementById('login-error-msg');
       const btn = document.getElementById('loginBtn');
       errBox.style.display = 'none';
       btn.disabled = true;
-      btn.textContent = 'Logging in...';
+      btn.textContent = 'Signing in...';
 
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value;
-      const role = document.getElementById('role').value;
 
       try {
-        const res = await Api.login({ username, password, role });
+        const res = await Api.login({ username, password });
         if (res && res.user) {
-          localStorage.setItem('rpmsUser', JSON.stringify(res.user));
+          showNotification('Login successful! Redirecting...', 'success');
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 400);
         }
-        window.location.href = 'dashboard.html';
       } catch (err) {
-        // Fallback for prototype direct pass-through if offline or demo credentials
-        console.warn('Backend login notice:', err);
-        errBox.textContent = err.message || 'Login failed. Please check credentials.';
+        errBox.textContent = err.message || 'Invalid username/email or password.';
         errBox.style.display = 'block';
         btn.disabled = false;
-        btn.textContent = 'Login';
+        btn.textContent = 'Sign In';
+      }
+    });
+
+    // Forgot password modal controls
+    const forgotLink = document.getElementById('forgotPasswordLink');
+    const forgotModal = document.getElementById('forgotPasswordModal');
+    const closeForgotModal = document.getElementById('closeForgotModal');
+    const cancelForgotBtn = document.getElementById('cancelForgotBtn');
+    const forgotForm = document.getElementById('forgotPasswordForm');
+    const forgotStatusMsg = document.getElementById('forgot-status-msg');
+    const submitForgotBtn = document.getElementById('submitForgotBtn');
+
+    function openModal() {
+      forgotModal.style.display = 'flex';
+      forgotStatusMsg.style.display = 'none';
+      document.getElementById('forgotEmail').value = '';
+    }
+
+    function closeModal() {
+      forgotModal.style.display = 'none';
+    }
+
+    forgotLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+    closeForgotModal.addEventListener('click', closeModal);
+    cancelForgotBtn.addEventListener('click', closeModal);
+    forgotModal.addEventListener('click', (e) => {
+      if (e.target === forgotModal) closeModal();
+    });
+
+    forgotForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('forgotEmail').value.trim();
+      submitForgotBtn.disabled = true;
+      submitForgotBtn.textContent = 'Sending...';
+      forgotStatusMsg.style.display = 'none';
+
+      try {
+        const res = await Api.forgotPassword(email);
+        forgotStatusMsg.style.background = '#ecfdf5';
+        forgotStatusMsg.style.border = '1px solid #a7f3d0';
+        forgotStatusMsg.style.color = '#065f46';
+        forgotStatusMsg.textContent = res.message || 'Password reset instructions have been initiated.';
+        forgotStatusMsg.style.display = 'block';
+        submitForgotBtn.disabled = false;
+        submitForgotBtn.textContent = 'Sent';
+      } catch (err) {
+        forgotStatusMsg.style.background = '#fef2f2';
+        forgotStatusMsg.style.border = '1px solid #fecaca';
+        forgotStatusMsg.style.color = '#b91c1c';
+        forgotStatusMsg.textContent = err.message || 'Unable to process reset request.';
+        forgotStatusMsg.style.display = 'block';
+        submitForgotBtn.disabled = false;
+        submitForgotBtn.textContent = 'Send Instructions';
       }
     });
   </script>

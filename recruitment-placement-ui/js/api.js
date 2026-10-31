@@ -10,7 +10,7 @@ const API_BASE_URL = (typeof window !== 'undefined' && window.RPMS_API_BASE_URL)
     : 'http://localhost:8080/api';
 
 /**
- * Escapes HTML characters to prevent XSS injection in dynamic table rendering.
+ * Escapes HTML characters to prevent XSS injection in dynamic rendering.
  */
 function escapeHtml(text) {
   if (text === null || text === undefined) return '';
@@ -56,7 +56,7 @@ function showNotification(message, type = 'info') {
   toast.style.fontWeight = '500';
   toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
   toast.style.transition = 'all 0.3s ease';
-  toast.style.maxWidth = '360px';
+  toast.style.maxWidth = '380px';
   toast.style.wordBreak = 'break-word';
   toast.textContent = message;
 
@@ -72,13 +72,20 @@ function showNotification(message, type = 'info') {
 }
 
 /**
- * Common fetch wrapper with unified JSON, error, and timeout handling.
+ * Common fetch wrapper with credentials, resilient token headers, and error handling.
  */
 async function apiRequest(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
   const defaultHeaders = {
     'Accept': 'application/json'
   };
+
+  // Attach active session token if present
+  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('rpmsAuthToken') : null;
+  if (token) {
+    defaultHeaders['X-Auth-Token'] = token;
+    defaultHeaders['Authorization'] = `Bearer ${token}`;
+  }
 
   if (options.body && typeof options.body === 'object' && !(options.body instanceof FormData)) {
     defaultHeaders['Content-Type'] = 'application/json';
@@ -90,15 +97,30 @@ async function apiRequest(endpoint, options = {}) {
     ...options.headers
   };
 
+  // Always include credentials for cross-origin session cookies
+  options.credentials = 'include';
+
   try {
     const response = await fetch(url, options);
-    
-    // Check if response is empty
+
     const contentType = response.headers.get('content-type');
     const isJson = contentType && contentType.includes('application/json');
     const data = isJson ? await response.json() : await response.text();
 
     if (!response.ok) {
+      // Handle 401 Unauthorized redirect
+      if (response.status === 401 && typeof window !== 'undefined') {
+        const isAuthPage = window.location.pathname.endsWith('login.html') ||
+                           window.location.pathname.endsWith('register.html') ||
+                           window.location.pathname === '/' ||
+                           window.location.pathname.endsWith('/');
+        if (!isAuthPage) {
+          Api.setUser(null);
+          localStorage.removeItem('rpmsAuthToken');
+          window.location.href = 'login.html';
+        }
+      }
+
       let errMsg = 'An unexpected error occurred.';
       if (data && typeof data === 'object') {
         errMsg = data.message || data.error || JSON.stringify(data);
@@ -274,16 +296,42 @@ const Api = {
   getTechWiseReport: () => apiRequest('/reports/tech-wise'),
 
   // Authentication
-  login: (credentials) => apiRequest('/auth/login', {
+  register: (userData) => apiRequest('/auth/register', {
     method: 'POST',
-    body: credentials
+    body: userData
   }),
-  getCurrentUser: () => apiRequest('/auth/me'),
-  logout: () => {
-    localStorage.removeItem('rpmsUser');
-    localStorage.removeItem('rpms_user');
-    return apiRequest('/auth/logout', { method: 'POST' }).catch(() => {});
+  login: async (credentials) => {
+    const res = await apiRequest('/auth/login', {
+      method: 'POST',
+      body: credentials
+    });
+    if (res && res.user) {
+      Api.setUser(res.user);
+    }
+    if (res && res.token) {
+      localStorage.setItem('rpmsAuthToken', res.token);
+    }
+    return res;
   },
+  getCurrentUser: () => apiRequest('/auth/me'),
+  logout: async () => {
+    try {
+      await apiRequest('/auth/logout', { method: 'POST' });
+    } catch (e) {
+      // Continue clean local sign out even if network fails
+    }
+    Api.setUser(null);
+    localStorage.removeItem('rpmsAuthToken');
+    window.location.href = 'login.html';
+  },
+  forgotPassword: (email) => apiRequest('/auth/forgot-password', {
+    method: 'POST',
+    body: { email }
+  }),
+  resetPassword: (payload) => apiRequest('/auth/reset-password', {
+    method: 'POST',
+    body: payload
+  }),
 
   // UI Utilities & Formatters
   escapeHtml: escapeHtml,
@@ -353,8 +401,40 @@ const Api = {
       const initials = (parts[0][0] + (parts.length > 1 ? parts[1][0] : '')).toUpperCase();
       avatarEl.textContent = initials || 'U';
     }
+  },
+
+  requireAuth: () => {
+    const user = Api.getUser();
+    if (!user) {
+      window.location.href = 'login.html';
+      return false;
+    }
+    return true;
   }
 };
+
+// Auto-wire logout buttons, nav user, and route guards
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  const currentPath = window.location.pathname;
+  const isAuthPage = currentPath.endsWith('login.html') ||
+                     currentPath.endsWith('register.html') ||
+                     currentPath === '/' ||
+                     currentPath.endsWith('/');
+
+  if (!isAuthPage && !Api.getUser()) {
+    window.location.href = 'login.html';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    Api.updateNavUser();
+    document.querySelectorAll('.header-logout-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        Api.logout();
+      });
+    });
+  });
+}
 
 window.escapeHtml = escapeHtml;
 window.showNotification = showNotification;
