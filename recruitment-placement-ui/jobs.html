@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Openings - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link active">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Jobs</span>
+          </div>
+          <h2 class="page-title">Job Openings</h2>
+        </div>
+        <div class="page-actions">
+          <a href="job-form.html" class="btn btn-primary">+ Create Job</a>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> JOB-2026-001 | Infosys | Associate Java Developer | 15 Openings | Pune | OPEN
+      </div>
+
+      <!-- Section: Job summary cards -->
+      <div class="stats-grid-4">
+        <div class="stat-card stat-success">
+          <span class="stat-title">Open Jobs</span>
+          <span id="jobs-kpi-open" class="stat-value">...</span>
+          <span class="stat-sub">Active corporate mandates</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Total Openings</span>
+          <span id="jobs-kpi-openings" class="stat-value">...</span>
+          <span class="stat-sub">Vacancies across companies</span>
+        </div>
+        <div class="stat-card stat-warning">
+          <span class="stat-title">Draft Jobs</span>
+          <span id="jobs-kpi-draft" class="stat-value">...</span>
+          <span class="stat-sub">Pending criteria finalization</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Closed Jobs</span>
+          <span id="jobs-kpi-closed" class="stat-value">...</span>
+          <span class="stat-sub">Hiring successfully completed</span>
+        </div>
+      </div>
+
+      <!-- Section: Job filter panel -->
+      <div class="filter-panel">
+        <h3 class="filter-title">Job filter panel</h3>
+        <form id="jobFilterForm" onsubmit="return false;">
+          <div class="filter-grid">
+            <div class="form-group">
+              <label for="filterJobTitle" class="form-label">Job Title</label>
+              <input type="text" id="filterJobTitle" name="title" class="form-control" placeholder="Search by job title">
+            </div>
+            <div class="form-group">
+              <label for="filterLocation" class="form-label">Location</label>
+              <input type="text" id="filterLocation" name="location" class="form-control" placeholder="e.g. Pune, Mumbai">
+            </div>
+            <div class="form-group">
+              <label for="filterJobStatus" class="form-label">Job Status</label>
+              <select id="filterJobStatus" name="status" class="form-control">
+                <option value="">All Statuses</option>
+                <option value="OPEN">OPEN</option>
+                <option value="CLOSED">CLOSED</option>
+                <option value="DRAFT">DRAFT</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="filterEmploymentType" class="form-label">Employment Type</label>
+              <select id="filterEmploymentType" name="employmentType" class="form-control">
+                <option value="">All Types</option>
+                <option value="PERMANENT">PERMANENT</option>
+                <option value="CONTRACT">CONTRACT</option>
+                <option value="FULL_TIME">FULL_TIME</option>
+                <option value="INTERNSHIP">INTERNSHIP</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button type="button" id="searchJobBtn" class="btn btn-primary">Search</button>
+            <button type="button" id="resetJobBtn" class="btn btn-outline">Reset</button>
+            <a href="job-form.html" class="btn btn-primary">Create Job</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Section: Jobs table and Status badges -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Job Mandates</h3>
+            <p class="card-subtitle">Active and historical job mandates from MySQL</p>
+          </div>
+          <span id="jobsCountBadge" style="font-size:12px; color:#64748b;">Loading...</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Job Code</th>
+                <th>Company</th>
+                <th>Job Title</th>
+                <th>Openings</th>
+                <th>Location</th>
+                <th>Salary Range</th>
+                <th>Type</th>
+                <th>Status Badges</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="jobsTbody">
+              <tr><td colspan="9" style="text-align:center;color:#64748b;">Loading job mandates from MySQL...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const companyIdParam = urlParams.get('companyId');
+
+    async function loadJobs() {
+      const tbody = document.getElementById('jobsTbody');
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#64748b;">Loading jobs...</td></tr>';
+
+      const params = {
+        title: document.getElementById('filterJobTitle').value.trim(),
+        location: document.getElementById('filterLocation').value.trim(),
+        status: document.getElementById('filterJobStatus').value,
+        employmentType: document.getElementById('filterEmploymentType').value
+      };
+      if (companyIdParam) {
+        params.companyId = companyIdParam;
+      }
+
+      try {
+        const list = await Api.getJobs(params);
+        document.getElementById('jobsCountBadge').textContent = `Showing ${list.length} Records`;
+
+        // Calculate metrics
+        let openCount = 0;
+        let openingsSum = 0;
+        let draftCount = 0;
+        let closedCount = 0;
+
+        list.forEach(j => {
+          const st = (j.job_status || '').toUpperCase();
+          if (st === 'OPEN') openCount++;
+          else if (st === 'DRAFT') draftCount++;
+          else if (st === 'CLOSED') closedCount++;
+          openingsSum += (j.openings || 1);
+        });
+
+        document.getElementById('jobs-kpi-open').textContent = openCount;
+        document.getElementById('jobs-kpi-openings').textContent = openingsSum;
+        document.getElementById('jobs-kpi-draft').textContent = draftCount;
+        document.getElementById('jobs-kpi-closed').textContent = closedCount;
+
+        if (!list || list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#64748b;padding:20px;">No jobs found matching criteria.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = list.map(j => {
+          const st = (j.job_status || 'OPEN').toUpperCase();
+          const badgeClass = st === 'OPEN' ? 'badge-open' : (st === 'DRAFT' ? 'badge-draft' : 'badge-rejected');
+          const salaryStr = (j.min_salary && j.max_salary)
+            ? `₹${Number(j.min_salary).toLocaleString()} - ₹${Number(j.max_salary).toLocaleString()}`
+            : (j.min_salary ? `₹${Number(j.min_salary).toLocaleString()}` : 'Negotiable');
+
+          return `
+            <tr>
+              <td><strong>JOB-${escapeHtml(j.job_id)}</strong></td>
+              <td>${escapeHtml(j.company_name || 'Company #' + j.company_id)}</td>
+              <td><strong>${escapeHtml(j.job_title)}</strong></td>
+              <td>${escapeHtml(j.openings || 1)}</td>
+              <td>${escapeHtml(j.work_location || 'N/A')}</td>
+              <td>${escapeHtml(salaryStr)}</td>
+              <td>${escapeHtml(j.employment_type || j.job_type || 'Full-time')}</td>
+              <td><span class="badge ${badgeClass}">${escapeHtml(st)}</span></td>
+              <td>
+                <div class="table-actions">
+                  <a href="job-form.html?id=${j.job_id}" class="btn btn-outline btn-sm">Edit</a>
+                  <a href="applications.html?jobId=${j.job_id}" class="btn btn-primary btn-sm">View Applications</a>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error('Error fetching jobs:', err);
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:#ef4444;padding:20px;">Failed to load jobs: ${escapeHtml(err.message)}</td></tr>`;
+        showNotification('Failed to load jobs: ' + err.message, 'error');
+      }
+    }
+
+    document.getElementById('searchJobBtn').addEventListener('click', loadJobs);
+    document.getElementById('resetJobBtn').addEventListener('click', () => {
+      document.getElementById('jobFilterForm').reset();
+      loadJobs();
+    });
+
+    document.addEventListener('DOMContentLoaded', loadJobs);
+  </script>
+</body>
+</html>

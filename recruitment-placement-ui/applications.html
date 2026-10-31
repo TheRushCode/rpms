@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applications - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link active">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Applications</span>
+          </div>
+          <h2 class="page-title">Applications</h2>
+        </div>
+        <div class="page-actions">
+          <button type="button" class="btn btn-outline">Check Eligibility</button>
+          <a href="interviews.html" class="btn btn-primary">Schedule Interview</a>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> APP1001 | Rahul Patil | Infosys | JOB-2026-001 | ELIGIBLE | SHORTLISTED
+      </div>
+
+      <!-- Prototype Validation Display Section -->
+      <div class="validation-notice">
+        <div>
+          <strong>Application Validation Messages to Demonstrate:</strong>
+          <ul style="margin-left: 20px; margin-top: 4px;">
+            <li>Candidate has already applied for this job.</li>
+            <li>Candidate does not meet the eligibility criteria.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section: Pipeline summary -->
+      <div class="stats-grid-5">
+        <div class="stat-card">
+          <span class="stat-title">Total Applied</span>
+          <span id="app-kpi-total" class="stat-value">...</span>
+          <span class="stat-sub">Submissions received</span>
+        </div>
+        <div class="stat-card stat-success">
+          <span class="stat-title">Shortlisted</span>
+          <span id="app-kpi-shortlisted" class="stat-value">...</span>
+          <span class="stat-sub">Shortlisted candidates</span>
+        </div>
+        <div class="stat-card stat-warning">
+          <span class="stat-title">Interview Stage</span>
+          <span id="app-kpi-interview" class="stat-value">...</span>
+          <span class="stat-sub">Interviews scheduled</span>
+        </div>
+        <div class="stat-card stat-purple">
+          <span class="stat-title">Selected / Offered</span>
+          <span id="app-kpi-selected" class="stat-value">...</span>
+          <span class="stat-sub">Assessment cleared</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Rejected</span>
+          <span id="app-kpi-rejected" class="stat-value">...</span>
+          <span class="stat-sub">Application closed</span>
+        </div>
+      </div>
+
+      <!-- Quick Apply Form Card -->
+      <div class="card" id="applyModalCard" style="margin-bottom: 20px;">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Submit Candidate Application</h3>
+            <p class="card-subtitle">Register a candidate against an open job mandate</p>
+          </div>
+          <span class="badge badge-active">NEW APPLICATION</span>
+        </div>
+        <div class="card-body">
+          <form id="newApplicationForm" onsubmit="return false;">
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="applyCandidateSelect" class="form-label">Select Candidate <span class="req">*</span></label>
+                <select id="applyCandidateSelect" class="form-control" required>
+                  <option value="">-- Choose Candidate --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="applyJobSelect" class="form-label">Select Job Opening <span class="req">*</span></label>
+                <select id="applyJobSelect" class="form-control" required>
+                  <option value="">-- Choose Job --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="applyRemarks" class="form-label">Submission Remarks</label>
+                <input type="text" id="applyRemarks" class="form-control" placeholder="e.g. Profile screened and shortlisted">
+              </div>
+            </div>
+            <div class="filter-actions" style="margin-top: 14px;">
+              <button type="submit" id="submitAppBtn" class="btn btn-primary">Submit Application</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Section: Application filters -->
+      <div class="filter-panel">
+        <h3 class="filter-title">Application filters</h3>
+        <form id="appFilterForm" onsubmit="return false;">
+          <div class="filter-grid">
+            <div class="form-group">
+              <label for="filterCandidate" class="form-label">Search</label>
+              <input type="text" id="filterCandidate" name="candidate" class="form-control" placeholder="Candidate or Job title">
+            </div>
+            <div class="form-group">
+              <label for="filterAppStatus" class="form-label">Application Status</label>
+              <select id="filterAppStatus" name="appStatus" class="form-control">
+                <option value="">All Statuses</option>
+                <option value="APPLIED">APPLIED</option>
+                <option value="SHORTLISTED">SHORTLISTED</option>
+                <option value="INTERVIEW_SCHEDULED">INTERVIEW_SCHEDULED</option>
+                <option value="SELECTED">SELECTED</option>
+                <option value="OFFERED">OFFERED</option>
+                <option value="PLACED">PLACED</option>
+                <option value="REJECTED">REJECTED</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button type="button" id="searchAppBtn" class="btn btn-primary">Search</button>
+            <button type="button" id="resetAppBtn" class="btn btn-outline">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Section: Applications table and Eligibility/status badges -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Applications table &amp; Eligibility/status badges</h3>
+            <p class="card-subtitle">Candidate-job pipeline management with operational actions</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline btn-sm">Shortlist</button>
+            <button type="button" class="btn btn-outline btn-sm">Reject</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Application ID</th>
+                <th>Candidate</th>
+                <th>Company</th>
+                <th>Job</th>
+                <th>Applied Date</th>
+                <th>Eligibility</th>
+                <th>Application Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="applicationsTableBody">
+              <tr>
+                <td colspan="8" style="text-align:center; padding: 24px; color:#64748b;">Loading applications...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      Api.updateNavUser();
+
+      const candidateSelect = document.getElementById('applyCandidateSelect');
+      const jobSelect = document.getElementById('applyJobSelect');
+      const tableBody = document.getElementById('applicationsTableBody');
+      const filterInput = document.getElementById('filterCandidate');
+      const statusSelect = document.getElementById('filterAppStatus');
+      const searchBtn = document.getElementById('searchAppBtn');
+      const resetBtn = document.getElementById('resetAppBtn');
+      const applyForm = document.getElementById('newApplicationForm');
+
+      let allApplications = [];
+
+      // Load candidates & jobs for dropdowns
+      async function loadDropdowns() {
+        try {
+          const [candidates, jobs] = await Promise.all([
+            Api.getCandidates(),
+            Api.getJobs()
+          ]);
+
+          if (candidateSelect) {
+            candidateSelect.innerHTML = '<option value="">-- Choose Candidate --</option>' +
+              candidates.map(c => `<option value="${c.candidate_id}">${Api.escapeHtml(c.first_name + ' ' + c.last_name)} (${c.candidate_code || 'CAN' + c.candidate_id}) - ${Api.escapeHtml(c.primary_technology || '')}</option>`).join('');
+          }
+
+          if (jobSelect) {
+            jobSelect.innerHTML = '<option value="">-- Choose Job --</option>' +
+              jobs.map(j => `<option value="${j.job_id}">${Api.escapeHtml(j.company_name ? j.company_name + ' - ' : '')}${Api.escapeHtml(j.job_title)} (${j.job_code || 'JOB' + j.job_id})</option>`).join('');
+          }
+        } catch (err) {
+          console.error('Error loading dropdowns:', err);
+        }
+      }
+
+      function updateKPIs(apps) {
+        const total = apps.length;
+        const shortlisted = apps.filter(a => (a.status || '').toUpperCase() === 'SHORTLISTED').length;
+        const interview = apps.filter(a => (a.status || '').toUpperCase().includes('INTERVIEW')).length;
+        const selected = apps.filter(a => ['SELECTED', 'OFFERED', 'PLACED'].includes((a.status || '').toUpperCase())).length;
+        const rejected = apps.filter(a => (a.status || '').toUpperCase() === 'REJECTED').length;
+
+        const setVal = (id, val) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = val;
+        };
+
+        setVal('app-kpi-total', total);
+        setVal('app-kpi-shortlisted', shortlisted);
+        setVal('app-kpi-interview', interview);
+        setVal('app-kpi-selected', selected);
+        setVal('app-kpi-rejected', rejected);
+      }
+
+      function getBadgeClass(status) {
+        const s = (status || '').toUpperCase();
+        if (s === 'SHORTLISTED') return 'badge-shortlisted';
+        if (s.includes('INTERVIEW')) return 'badge-interview';
+        if (s === 'SELECTED' || s === 'PLACED') return 'badge-selected';
+        if (s === 'REJECTED') return 'badge-rejected';
+        if (s === 'OFFERED') return 'badge-purple';
+        return 'badge-applied';
+      }
+
+      function renderTable(apps) {
+        if (!tableBody) return;
+        if (!apps || apps.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 24px; color:#64748b;">No applications found.</td></tr>';
+          return;
+        }
+
+        tableBody.innerHTML = apps.map(app => {
+          const appId = app.application_code || ('APP' + (1000 + (app.application_id || 0)));
+          const candName = Api.escapeHtml(app.candidate_name || `${app.first_name || ''} ${app.last_name || ''}`.trim() || 'Candidate #' + app.candidate_id);
+          const candCode = Api.escapeHtml(app.candidate_code || ('CAN' + app.candidate_id));
+          const compName = Api.escapeHtml(app.company_name || 'N/A');
+          const jobCode = Api.escapeHtml(app.job_code || ('JOB' + app.job_id));
+          const jobTitle = Api.escapeHtml(app.job_title || 'N/A');
+          const appliedDate = Api.formatDate(app.applied_date || app.created_at);
+          const isEligible = app.is_eligible === 1 || app.is_eligible === true || String(app.is_eligible) === 'true';
+          const status = (app.status || 'APPLIED').toUpperCase();
+          const badgeClass = getBadgeClass(status);
+
+          let actionButtons = '';
+          if (status === 'APPLIED') {
+            actionButtons = `
+              <button class="btn btn-outline btn-sm" onclick="handleStatusChange(${app.application_id}, 'SHORTLISTED')">Shortlist</button>
+              <button class="btn btn-outline btn-sm" onclick="handleStatusChange(${app.application_id}, 'REJECTED')" style="color:#dc2626;">Reject</button>
+            `;
+          } else if (status === 'SHORTLISTED') {
+            actionButtons = `
+              <a href="interviews.html?candidate_id=${app.candidate_id}&job_id=${app.job_id}&application_id=${app.application_id}" class="btn btn-primary btn-sm">Schedule Interview</a>
+              <button class="btn btn-outline btn-sm" onclick="handleStatusChange(${app.application_id}, 'REJECTED')" style="color:#dc2626;">Reject</button>
+            `;
+          } else if (status.includes('INTERVIEW')) {
+            actionButtons = `
+              <a href="interviews.html" class="btn btn-outline btn-sm">View Interview</a>
+              <a href="placement-process.html?application_id=${app.application_id}" class="btn btn-primary btn-sm">Offer</a>
+            `;
+          } else if (status === 'SELECTED' || status === 'OFFERED') {
+            actionButtons = `
+              <a href="placement-process.html?application_id=${app.application_id}" class="btn btn-outline btn-sm">View Offer</a>
+            `;
+          } else {
+            actionButtons = `<span style="font-size:12px;color:#64748b;">${status}</span>`;
+          }
+
+          return `
+            <tr>
+              <td><strong>${appId}</strong></td>
+              <td>
+                <a href="candidate-details.html?id=${app.candidate_id}"><strong>${candName}</strong></a><br>
+                <span style="font-size:11px;color:#64748b;">${candCode}</span>
+              </td>
+              <td>${compName}</td>
+              <td>${jobCode}<br><span style="font-size:11px;color:#64748b;">${jobTitle}</span></td>
+              <td>${appliedDate}</td>
+              <td><span class="badge ${isEligible ? 'badge-eligible' : 'badge-rejected'}">${isEligible ? 'ELIGIBLE' : 'NOT ELIGIBLE'}</span></td>
+              <td><span class="badge ${badgeClass}">${status}</span></td>
+              <td>
+                <div class="table-actions">
+                  ${actionButtons}
+                  <a href="candidate-details.html?id=${app.candidate_id}" class="btn btn-outline btn-sm">View History</a>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      window.handleStatusChange = async function(appId, newStatus) {
+        if (!confirm(`Are you sure you want to change this application status to ${newStatus}?`)) return;
+        try {
+          await Api.updateApplicationStatus(appId, newStatus, `Status updated to ${newStatus} from applications console`);
+          Api.showAlert(`Application #${appId} updated to ${newStatus}`, 'success');
+          await loadApplications();
+        } catch (err) {
+          Api.showAlert(err.message || 'Failed to update application status', 'danger');
+        }
+      };
+
+      async function loadApplications() {
+        try {
+          allApplications = await Api.getApplications();
+          updateKPIs(allApplications);
+          applyFilter();
+        } catch (err) {
+          console.error('Error fetching applications:', err);
+          if (tableBody) {
+            tableBody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 24px; color:#dc2626;">Failed to load applications: ${Api.escapeHtml(err.message)}</td></tr>`;
+          }
+        }
+      }
+
+      function applyFilter() {
+        const query = (filterInput ? filterInput.value : '').toLowerCase().trim();
+        const selStatus = filterInput ? (statusSelect.value || '').toUpperCase() : '';
+
+        const filtered = allApplications.filter(app => {
+          const cName = (app.candidate_name || `${app.first_name || ''} ${app.last_name || ''}`).toLowerCase();
+          const jTitle = (app.job_title || '').toLowerCase();
+          const compName = (app.company_name || '').toLowerCase();
+          const appCode = (app.application_code || '').toLowerCase();
+          const status = (app.status || '').toUpperCase();
+
+          const matchesQuery = !query || cName.includes(query) || jTitle.includes(query) || compName.includes(query) || appCode.includes(query);
+          const matchesStatus = !selStatus || status === selStatus;
+          return matchesQuery && matchesStatus;
+        });
+
+        renderTable(filtered);
+      }
+
+      if (searchBtn) searchBtn.addEventListener('click', applyFilter);
+      if (filterInput) filterInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') applyFilter(); });
+      if (statusSelect) statusSelect.addEventListener('change', applyFilter);
+      if (resetBtn) resetBtn.addEventListener('click', () => {
+        if (filterInput) filterInput.value = '';
+        if (statusSelect) statusSelect.value = '';
+        applyFilter();
+      });
+
+      // Quick apply submission
+      if (applyForm) {
+        applyForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const candidateId = candidateSelect.value;
+          const jobId = jobSelect.value;
+          const remarks = document.getElementById('applyRemarks').value;
+
+          if (!candidateId || !jobId) {
+            Api.showAlert('Please select both a candidate and a job opening.', 'warning');
+            return;
+          }
+
+          const submitBtn = document.getElementById('submitAppBtn');
+          if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Submitting...'; }
+
+          try {
+            await Api.createApplication({
+              candidate_id: parseInt(candidateId, 10),
+              job_id: parseInt(jobId, 10),
+              remarks: remarks || 'Applied via admin console'
+            });
+            Api.showAlert('Application submitted successfully!', 'success');
+            applyForm.reset();
+            await loadApplications();
+          } catch (err) {
+            Api.showAlert(err.message || 'Failed to submit application', 'danger');
+          } finally {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit Application'; }
+          }
+        });
+      }
+
+      await loadDropdowns();
+      await loadApplications();
+    });
+  </script>
+</body>
+</html>

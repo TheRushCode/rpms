@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link active">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Reports</span>
+          </div>
+          <h2 class="page-title">Reports</h2>
+        </div>
+        <div class="page-actions">
+          <button type="button" class="btn btn-outline" onclick="window.print()">Print / Export</button>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Live Analytics:</strong> Funnel, Company-wise, Technology-wise, and Pipeline metrics loaded from database.
+      </div>
+
+      <!-- Report Filters -->
+      <div class="filter-panel">
+        <h3 class="filter-title">Filter Reports</h3>
+        <form id="reportsFilterForm" onsubmit="return false;">
+          <div class="filter-grid">
+            <div class="form-group">
+              <label for="repDateFrom" class="form-label">Date From</label>
+              <input type="date" id="repDateFrom" name="dateFrom" class="form-control" value="2026-01-01">
+            </div>
+            <div class="form-group">
+              <label for="repDateTo" class="form-label">Date To</label>
+              <input type="date" id="repDateTo" name="dateTo" class="form-control" value="2026-12-31">
+            </div>
+            <div class="form-group">
+              <label for="repTech" class="form-label">Technology</label>
+              <select id="repTech" name="technology" class="form-control">
+                <option value="">All Technologies</option>
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="Testing">Testing</option>
+                <option value="Data Analytics">Data Analytics</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="repCompany" class="form-label">Company</label>
+              <select id="repCompany" name="company" class="form-control">
+                <option value="">All Companies</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="repPassingYear" class="form-label">Passing Year</label>
+              <select id="repPassingYear" name="passingYear" class="form-control">
+                <option value="">All Batches</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button type="button" id="btnApplyFilter" class="btn btn-primary">Apply Filters</button>
+            <button type="button" id="btnResetFilter" class="btn btn-outline">Reset</button>
+            <button type="button" class="btn btn-outline" onclick="window.print()">Print / Export</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- KPI cards: Applications, Interviews, Selected, Joined, Placement % -->
+      <div class="stats-grid-5">
+        <div class="stat-card">
+          <span class="stat-title">Applications</span>
+          <span id="rep-stat-applications" class="stat-value">...</span>
+          <span class="stat-sub">Total submissions</span>
+        </div>
+        <div class="stat-card stat-warning">
+          <span class="stat-title">Interviews</span>
+          <span id="rep-stat-interviews" class="stat-value">...</span>
+          <span class="stat-sub">Interviewed candidates</span>
+        </div>
+        <div class="stat-card stat-purple">
+          <span class="stat-title">Selected</span>
+          <span id="rep-stat-selected" class="stat-value">...</span>
+          <span class="stat-sub">Selected profiles</span>
+        </div>
+        <div class="stat-card stat-success">
+          <span class="stat-title">Joined</span>
+          <span id="rep-stat-joined" class="stat-value">...</span>
+          <span class="stat-sub">Joined organizations</span>
+        </div>
+        <div class="stat-card stat-success">
+          <span class="stat-title">Placement %</span>
+          <span id="rep-stat-rate" class="stat-value">...</span>
+          <span id="rep-stat-rate-sub" class="stat-sub">Offer-to-Join</span>
+        </div>
+      </div>
+
+      <!-- Required Report Section 1: Recruitment Funnel -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Recruitment Funnel</h3>
+            <p id="funnelSubtitle" class="card-subtitle">Real-time candidate transition through recruitment stages</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="funnel-container" id="funnelContainer">
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Applications</span>
+              <div class="funnel-track">
+                <div id="funnelBarApps" class="funnel-fill" style="width: 100%;">100%</div>
+              </div>
+              <span id="funnelCountApps" class="funnel-count">0</span>
+            </div>
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Shortlisted</span>
+              <div class="funnel-track">
+                <div id="funnelBarShort" class="funnel-fill" style="width: 0%;">0%</div>
+              </div>
+              <span id="funnelCountShort" class="funnel-count">0</span>
+            </div>
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Interviewed</span>
+              <div class="funnel-track">
+                <div id="funnelBarInt" class="funnel-fill" style="width: 0%;">0%</div>
+              </div>
+              <span id="funnelCountInt" class="funnel-count">0</span>
+            </div>
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Selected</span>
+              <div class="funnel-track">
+                <div id="funnelBarSel" class="funnel-fill" style="width: 0%;">0%</div>
+              </div>
+              <span id="funnelCountSel" class="funnel-count">0</span>
+            </div>
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Joined</span>
+              <div class="funnel-track">
+                <div id="funnelBarJoined" class="funnel-fill" style="width: 0%;">0%</div>
+              </div>
+              <span id="funnelCountJoined" class="funnel-count">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reports Grid: Company-wise Placement & Technology-wise Placement -->
+      <div class="reports-grid">
+        <!-- Section 2: Company-wise Placement -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Company-wise Placement</h3>
+              <p class="card-subtitle">Placement performance categorized by employer</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Openings</th>
+                  <th>Applications</th>
+                  <th>Placements</th>
+                  <th>Avg Package</th>
+                </tr>
+              </thead>
+              <tbody id="companyReportTableBody">
+                <tr><td colspan="5" style="text-align:center; padding: 20px; color:#64748b;">Loading company report...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 3: Technology-wise Placement -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Technology-wise Placement</h3>
+              <p class="card-subtitle">Placement results grouped by technology domain</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Technology</th>
+                  <th>Candidates</th>
+                  <th>Placed</th>
+                  <th>Placement Rate</th>
+                </tr>
+              </thead>
+              <tbody id="techReportTableBody">
+                <tr><td colspan="4" style="text-align:center; padding: 20px; color:#64748b;">Loading technology report...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reports Grid: Recruiter Performance & Pending Interviews -->
+      <div class="reports-grid">
+        <!-- Section 4: Recruiter Performance -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Recruiter Performance</h3>
+              <p class="card-subtitle">Recruiter-wise interview and selection tracking</p>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Recruiter</th>
+                  <th>Mapped</th>
+                  <th>Interviews</th>
+                  <th>Selected</th>
+                  <th>Placed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Admin Placement Officer</strong></td>
+                  <td>10</td>
+                  <td>6</td>
+                  <td>4</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td><strong>Technical Interviewer</strong></td>
+                  <td>8</td>
+                  <td>5</td>
+                  <td>3</td>
+                  <td>2</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 5: Pending Interviews -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Pending Interviews</h3>
+              <p class="card-subtitle">Rounds awaiting completion or rescheduling</p>
+            </div>
+            <a href="interviews.html" class="btn btn-outline btn-sm">View in Interviews</a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Candidate</th>
+                  <th>Company</th>
+                  <th>Round</th>
+                  <th>Date &amp; Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="pendingInterviewsTableBody">
+                <tr><td colspan="5" style="text-align:center; padding: 20px; color:#64748b;">Loading pending interviews...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 6: Open Job Aging -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Open Job Aging</h3>
+            <p class="card-subtitle">Active employer vacancy timelines and duration open</p>
+          </div>
+          <a href="jobs.html" class="btn btn-outline btn-sm">All Jobs</a>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Job Code</th>
+                <th>Company</th>
+                <th>Designation</th>
+                <th>Work Location</th>
+                <th>Job Type</th>
+                <th>Min Qualification</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="openJobsTableBody">
+              <tr><td colspan="7" style="text-align:center; padding: 20px; color:#64748b;">Loading open jobs...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      Api.updateNavUser();
+
+      const repCompanySelect = document.getElementById('repCompany');
+      const companyTbody = document.getElementById('companyReportTableBody');
+      const techTbody = document.getElementById('techReportTableBody');
+      const pendingTbody = document.getElementById('pendingInterviewsTableBody');
+      const jobsTbody = document.getElementById('openJobsTableBody');
+
+      let companyReports = [];
+      let techReports = [];
+
+      async function loadDropdowns() {
+        try {
+          const companies = await Api.getCompanies();
+          if (repCompanySelect) {
+            repCompanySelect.innerHTML = '<option value="">All Companies</option>' +
+              companies.map(c => `<option value="${Api.escapeHtml(c.company_name)}">${Api.escapeHtml(c.company_name)}</option>`).join('');
+          }
+        } catch (err) {
+          console.error('Error loading companies dropdown:', err);
+        }
+      }
+
+      async function loadFunnel() {
+        try {
+          const funnel = await Api.getReportsFunnel();
+          const apps = funnel.applications || 0;
+          const short = funnel.shortlisted || 0;
+          const ints = funnel.interviews || 0;
+          const sel = funnel.selected || 0;
+          const placed = funnel.placed || 0;
+
+          const setTxt = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+          setTxt('rep-stat-applications', apps.toLocaleString());
+          setTxt('rep-stat-interviews', ints.toLocaleString());
+          setTxt('rep-stat-selected', sel.toLocaleString());
+          setTxt('rep-stat-joined', placed.toLocaleString());
+
+          const rate = sel > 0 ? Math.round((placed / sel) * 1000) / 10 : (apps > 0 ? Math.round((placed / apps) * 1000) / 10 : 0);
+          setTxt('rep-stat-rate', rate + '%');
+
+          const sub = document.getElementById('funnelSubtitle');
+          if (sub) {
+            sub.textContent = `Applications: ${apps} | Shortlisted: ${short} | Interviewed: ${ints} | Selected: ${sel} | Placed: ${placed} | Rate: ${rate}%`;
+          }
+
+          const setBar = (barId, countId, pct, count) => {
+            const bar = document.getElementById(barId);
+            const cnt = document.getElementById(countId);
+            const val = pct || 0;
+            if (bar) {
+              bar.style.width = Math.max(val, 5) + '%';
+              bar.textContent = val + '%';
+            }
+            if (cnt) cnt.textContent = count;
+          };
+
+          setBar('funnelBarApps', 'funnelCountApps', funnel.applicationsPct || 100, apps);
+          setBar('funnelBarShort', 'funnelCountShort', funnel.shortlistedPct || 0, short);
+          setBar('funnelBarInt', 'funnelCountInt', funnel.interviewsPct || 0, ints);
+          setBar('funnelBarSel', 'funnelCountSel', funnel.selectedPct || 0, sel);
+          setBar('funnelBarJoined', 'funnelCountJoined', funnel.placedPct || 0, placed);
+        } catch (err) {
+          console.error('Error loading funnel report:', err);
+        }
+      }
+
+      async function loadCompanyReport() {
+        try {
+          companyReports = await Api.getCompanyWiseReport();
+          renderCompanyTable(companyReports);
+        } catch (err) {
+          console.error('Error loading company report:', err);
+          if (companyTbody) companyTbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px; color:#dc2626;">Failed: ${Api.escapeHtml(err.message)}</td></tr>`;
+        }
+      }
+
+      function renderCompanyTable(list) {
+        if (!companyTbody) return;
+        if (!list || list.length === 0) {
+          companyTbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 20px; color:#64748b;">No company data available.</td></tr>';
+          return;
+        }
+
+        companyTbody.innerHTML = list.map(c => {
+          const compName = Api.escapeHtml(c.company_name || 'N/A');
+          const jobs = c.total_jobs || 0;
+          const apps = c.total_applications || 0;
+          const placed = c.total_placements || 0;
+          const avgPkg = c.average_package ? `${parseFloat(c.average_package).toFixed(1)} LPA` : 'N/A';
+
+          return `
+            <tr>
+              <td><strong>${compName}</strong></td>
+              <td>${jobs}</td>
+              <td>${apps}</td>
+              <td>${placed}</td>
+              <td><span class="badge badge-active">${avgPkg}</span></td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      async function loadTechReport() {
+        try {
+          techReports = await Api.getTechWiseReport();
+          renderTechTable(techReports);
+        } catch (err) {
+          console.error('Error loading tech report:', err);
+          if (techTbody) techTbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding: 20px; color:#dc2626;">Failed: ${Api.escapeHtml(err.message)}</td></tr>`;
+        }
+      }
+
+      function renderTechTable(list) {
+        if (!techTbody) return;
+        if (!list || list.length === 0) {
+          techTbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 20px; color:#64748b;">No technology data available.</td></tr>';
+          return;
+        }
+
+        techTbody.innerHTML = list.map(t => {
+          const techName = Api.escapeHtml(t.technology || 'Other');
+          const total = t.total_candidates || 0;
+          const placed = t.placed_candidates || 0;
+          const rate = t.placement_percentage != null ? `${t.placement_percentage}%` : '0%';
+
+          return `
+            <tr>
+              <td><strong>${techName}</strong></td>
+              <td>${total}</td>
+              <td>${placed}</td>
+              <td><span class="badge badge-active">${rate}</span></td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      async function loadPendingInterviews() {
+        try {
+          const interviews = await Api.getInterviews({ status: 'SCHEDULED' });
+          if (!pendingTbody) return;
+          if (!interviews || interviews.length === 0) {
+            pendingTbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 20px; color:#64748b;">No pending interviews.</td></tr>';
+            return;
+          }
+
+          pendingTbody.innerHTML = interviews.slice(0, 5).map(i => {
+            const candName = Api.escapeHtml(i.candidate_name || 'Candidate #' + i.candidate_id);
+            const compName = Api.escapeHtml(i.company_name || 'N/A');
+            const roundName = Api.escapeHtml(i.round_name || 'Technical');
+            const sched = Api.formatDateTime(i.scheduled_at);
+            const status = (i.round_status || 'SCHEDULED').toUpperCase();
+
+            return `
+              <tr>
+                <td><strong>${candName}</strong></td>
+                <td>${compName}</td>
+                <td>${roundName}</td>
+                <td>${sched}</td>
+                <td><span class="badge badge-scheduled">${status}</span></td>
+              </tr>
+            `;
+          }).join('');
+        } catch (err) {
+          console.error('Error loading pending interviews:', err);
+        }
+      }
+
+      async function loadOpenJobs() {
+        try {
+          const jobs = await Api.getJobs();
+          if (!jobsTbody) return;
+          if (!jobs || jobs.length === 0) {
+            jobsTbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 20px; color:#64748b;">No open jobs found.</td></tr>';
+            return;
+          }
+
+          jobsTbody.innerHTML = jobs.slice(0, 6).map(j => {
+            const jCode = Api.escapeHtml(j.job_code || ('JOB' + j.job_id));
+            const cName = Api.escapeHtml(j.company_name || 'N/A');
+            const title = Api.escapeHtml(j.job_title || 'N/A');
+            const loc = Api.escapeHtml(j.work_location || 'Pune');
+            const type = Api.escapeHtml(j.job_type || 'FULL_TIME');
+            const qual = Api.escapeHtml(j.min_qualification || 'BE / BTech');
+            const status = (j.status || 'OPEN').toUpperCase();
+
+            return `
+              <tr>
+                <td><strong>${jCode}</strong></td>
+                <td>${cName}</td>
+                <td>${title}</td>
+                <td>${loc}</td>
+                <td>${type}</td>
+                <td>${qual}</td>
+                <td><span class="badge ${status === 'OPEN' ? 'badge-open' : 'badge-closed'}">${status}</span></td>
+              </tr>
+            `;
+          }).join('');
+        } catch (err) {
+          console.error('Error loading open jobs:', err);
+        }
+      }
+
+      const btnApplyFilter = document.getElementById('btnApplyFilter');
+      const btnResetFilter = document.getElementById('btnResetFilter');
+
+      if (btnApplyFilter) {
+        btnApplyFilter.addEventListener('click', () => {
+          const selCo = (repCompanySelect ? repCompanySelect.value : '').toLowerCase().trim();
+          const selTech = (document.getElementById('repTech') ? document.getElementById('repTech').value : '').toLowerCase().trim();
+
+          if (selCo) {
+            renderCompanyTable(companyReports.filter(c => (c.company_name || '').toLowerCase().includes(selCo)));
+          } else {
+            renderCompanyTable(companyReports);
+          }
+
+          if (selTech) {
+            renderTechTable(techReports.filter(t => (t.technology || '').toLowerCase().includes(selTech)));
+          } else {
+            renderTechTable(techReports);
+          }
+        });
+      }
+
+      if (btnResetFilter) {
+        btnResetFilter.addEventListener('click', () => {
+          if (repCompanySelect) repCompanySelect.value = '';
+          if (document.getElementById('repTech')) document.getElementById('repTech').value = '';
+          renderCompanyTable(companyReports);
+          renderTechTable(techReports);
+        });
+      }
+
+      await Promise.all([
+        loadDropdowns(),
+        loadFunnel(),
+        loadCompanyReport(),
+        loadTechReport(),
+        loadPendingInterviews(),
+        loadOpenJobs()
+      ]);
+    });
+  </script>
+</body>
+</html>

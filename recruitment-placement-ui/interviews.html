@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interviews - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link active">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Interviews</span>
+          </div>
+          <h2 class="page-title">Interviews</h2>
+        </div>
+        <div class="page-actions">
+          <a href="#scheduleSection" class="btn btn-primary">+ Schedule Interview</a>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> INT1008 | Rahul Patil | Infosys | Technical | 03-Nov-2026 11:30 AM | ONLINE | SCHEDULED
+      </div>
+
+      <!-- Section: Today/upcoming cards -->
+      <div class="stats-grid-4">
+        <div class="stat-card stat-warning">
+          <span class="stat-title">Today's Interviews</span>
+          <span id="int-stat-today" class="stat-value">...</span>
+          <span class="stat-sub">Across active campus drives</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Upcoming This Week</span>
+          <span id="int-stat-upcoming" class="stat-value">...</span>
+          <span class="stat-sub">Technical &amp; HR assessments</span>
+        </div>
+        <div class="stat-card stat-success">
+          <span class="stat-title">Completed Rounds</span>
+          <span id="int-stat-completed" class="stat-value">...</span>
+          <span class="stat-sub">Evaluated in current cycle</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Rescheduled / No Show</span>
+          <span id="int-stat-other" class="stat-value">...</span>
+          <span class="stat-sub">Pending re-allocation</span>
+        </div>
+      </div>
+
+      <!-- Prototype Validation Display Section -->
+      <div class="validation-notice">
+        <div>
+          <strong>Interview Validation Message to Demonstrate:</strong>
+          <ul style="margin-left: 20px; margin-top: 4px;">
+            <li>Interview date cannot be in the past.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Section: Interview scheduling form -->
+      <div class="card" id="scheduleSection">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Interview scheduling form</h3>
+            <p class="card-subtitle">Schedule interview rounds and track interview status</p>
+          </div>
+          <span class="badge badge-scheduled" id="formStatusBadge">STATUS: SCHEDULED</span>
+        </div>
+        <div class="card-body">
+          <form id="scheduleForm" onsubmit="return false;">
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="intCandidate" class="form-label">Candidate <span class="req">*</span></label>
+                <select id="intCandidate" name="candidate" class="form-control" required>
+                  <option value="">-- Select Candidate --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="intCompany" class="form-label">Company <span class="req">*</span></label>
+                <select id="intCompany" name="company" class="form-control" required>
+                  <option value="">-- Select Company --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="intJob" class="form-label">Job <span class="req">*</span></label>
+                <select id="intJob" name="job" class="form-control" required>
+                  <option value="">-- Select Job --</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-3" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="intRound" class="form-label">Interview Round <span class="req">*</span></label>
+                <select id="intRound" name="interviewRound" class="form-control" required>
+                  <option value="Aptitude">Aptitude</option>
+                  <option value="Technical" selected>Technical</option>
+                  <option value="Managerial">Managerial</option>
+                  <option value="HR">HR</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="intDate" class="form-label">Interview Date <span class="req">*</span></label>
+                <input type="date" id="intDate" name="interviewDate" class="form-control" required>
+                <span id="dateValidationMsg" class="field-error-text" style="display:none;">&#9432; Validation: Interview date cannot be in the past.</span>
+              </div>
+              <div class="form-group">
+                <label for="intTime" class="form-label">Interview Time <span class="req">*</span></label>
+                <input type="time" id="intTime" name="interviewTime" class="form-control" value="11:30" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="intMode" class="form-label">Mode <span class="req">*</span></label>
+                <select id="intMode" name="mode" class="form-control" required>
+                  <option value="ONLINE" selected>Online</option>
+                  <option value="OFFLINE">Offline</option>
+                  <option value="TELEPHONIC">Telephonic</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="interviewerName" class="form-label">Interviewer Name</label>
+                <input type="text" id="interviewerName" name="interviewerName" class="form-control" placeholder="Name of interviewer" value="Technical Lead">
+              </div>
+            </div>
+
+            <div class="filter-actions" style="margin-top: 20px;">
+              <button type="submit" id="btnSchedule" class="btn btn-primary">Schedule</button>
+              <button type="reset" id="btnResetSchedule" class="btn btn-outline">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Search Filters -->
+      <div class="filter-panel">
+        <h3 class="filter-title">Search &amp; Filter Interviews</h3>
+        <form id="filterForm" onsubmit="return false;">
+          <div class="filter-grid">
+            <div class="form-group">
+              <label for="searchCandidate" class="form-label">Candidate</label>
+              <input type="text" id="searchCandidate" name="candidate" class="form-control" placeholder="Search candidate name">
+            </div>
+            <div class="form-group">
+              <label for="searchCompany" class="form-label">Company</label>
+              <select id="searchCompany" name="company" class="form-control">
+                <option value="">All Companies</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="searchRound" class="form-label">Interview Round</label>
+              <select id="searchRound" name="round" class="form-control">
+                <option value="">All Rounds</option>
+                <option value="Aptitude">Aptitude</option>
+                <option value="Technical">Technical</option>
+                <option value="Managerial">Managerial</option>
+                <option value="HR">HR</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="searchDate" class="form-label">Interview Date</label>
+              <input type="date" id="searchDate" name="date" class="form-control">
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button type="button" id="btnSearchFilter" class="btn btn-primary">Search</button>
+            <button type="button" id="btnResetFilter" class="btn btn-outline">Reset</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Section: Interview table and Status badges -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Interview table &amp; Status badges</h3>
+            <p class="card-subtitle">Interview rounds, dates, modes, and progress status badges</p>
+          </div>
+          <span id="interviewCountBadge" style="font-size:12px; color:#64748b;">Showing Records</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Interview ID</th>
+                <th>Candidate</th>
+                <th>Company</th>
+                <th>Job</th>
+                <th>Interview Round</th>
+                <th>Interview Date &amp; Time</th>
+                <th>Mode</th>
+                <th>Interviewer Name</th>
+                <th>Status Badges</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="interviewsTableBody">
+              <tr>
+                <td colspan="10" style="text-align:center; padding: 24px; color:#64748b;">Loading interviews...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      Api.updateNavUser();
+
+      const params = new URLSearchParams(window.location.search);
+      const prefillCandId = params.get('candidate_id');
+      const prefillJobId = params.get('job_id');
+      const prefillAppId = params.get('application_id');
+
+      const candSelect = document.getElementById('intCandidate');
+      const compSelect = document.getElementById('intCompany');
+      const jobSelect = document.getElementById('intJob');
+      const roundSelect = document.getElementById('intRound');
+      const dateInput = document.getElementById('intDate');
+      const timeInput = document.getElementById('intTime');
+      const modeSelect = document.getElementById('intMode');
+      const interviewerInput = document.getElementById('interviewerName');
+      const dateValMsg = document.getElementById('dateValidationMsg');
+
+      const filterCandidate = document.getElementById('searchCandidate');
+      const filterCompany = document.getElementById('searchCompany');
+      const filterRound = document.getElementById('searchRound');
+      const filterDate = document.getElementById('searchDate');
+      const btnSearchFilter = document.getElementById('btnSearchFilter');
+      const btnResetFilter = document.getElementById('btnResetFilter');
+
+      const scheduleForm = document.getElementById('scheduleForm');
+      const tableBody = document.getElementById('interviewsTableBody');
+      const countBadge = document.getElementById('interviewCountBadge');
+
+      // Set default date to today or tomorrow
+      const todayObj = new Date();
+      const todayStr = todayObj.toISOString().split('T')[0];
+      if (dateInput && !dateInput.value) {
+        dateInput.value = todayStr;
+      }
+
+      let candidatesList = [];
+      let companiesList = [];
+      let jobsList = [];
+      let interviewsList = [];
+
+      async function loadMasterData() {
+        try {
+          const [candidates, companies, jobs] = await Promise.all([
+            Api.getCandidates(),
+            Api.getCompanies(),
+            Api.getJobs()
+          ]);
+
+          candidatesList = candidates || [];
+          companiesList = companies || [];
+          jobsList = jobs || [];
+
+          if (candSelect) {
+            candSelect.innerHTML = '<option value="">-- Select Candidate --</option>' +
+              candidatesList.map(c => `<option value="${c.candidate_id}" ${prefillCandId && String(c.candidate_id) === String(prefillCandId) ? 'selected' : ''}>${Api.escapeHtml(c.first_name + ' ' + c.last_name)} (${c.candidate_code || 'CAN' + c.candidate_id}) - ${Api.escapeHtml(c.primary_technology || '')}</option>`).join('');
+          }
+
+          if (compSelect) {
+            compSelect.innerHTML = '<option value="">-- Select Company --</option>' +
+              companiesList.map(co => `<option value="${co.company_id}">${Api.escapeHtml(co.company_name)}</option>`).join('');
+          }
+
+          populateJobs(null);
+
+          if (filterCompany) {
+            filterCompany.innerHTML = '<option value="">All Companies</option>' +
+              companiesList.map(co => `<option value="${Api.escapeHtml(co.company_name)}">${Api.escapeHtml(co.company_name)}</option>`).join('');
+          }
+        } catch (err) {
+          console.error('Error loading master data:', err);
+        }
+      }
+
+      function populateJobs(companyId) {
+        if (!jobSelect) return;
+        const filtered = companyId ? jobsList.filter(j => String(j.company_id) === String(companyId)) : jobsList;
+        jobSelect.innerHTML = '<option value="">-- Select Job --</option>' +
+          filtered.map(j => `<option value="${j.job_id}" ${prefillJobId && String(j.job_id) === String(prefillJobId) ? 'selected' : ''}>${Api.escapeHtml(j.company_name ? j.company_name + ' - ' : '')}${Api.escapeHtml(j.job_title)} (${j.job_code || 'JOB' + j.job_id})</option>`).join('');
+      }
+
+      if (compSelect) {
+        compSelect.addEventListener('change', () => {
+          populateJobs(compSelect.value);
+        });
+      }
+
+      if (dateInput) {
+        dateInput.addEventListener('change', () => {
+          if (dateInput.value && dateInput.value < todayStr) {
+            if (dateValMsg) dateValMsg.style.display = 'block';
+          } else {
+            if (dateValMsg) dateValMsg.style.display = 'none';
+          }
+        });
+      }
+
+      function updateKPIs(list) {
+        const todayIso = todayStr;
+        const nowMs = new Date().getTime();
+        const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
+
+        let todayCount = 0;
+        let upcomingCount = 0;
+        let completedCount = 0;
+        let otherCount = 0;
+
+        list.forEach(i => {
+          const status = (i.round_status || '').toUpperCase();
+          if (status === 'COMPLETED') completedCount++;
+          else if (['RESCHEDULED', 'NO_SHOW', 'CANCELLED'].includes(status)) otherCount++;
+
+          if (i.scheduled_at) {
+            const dateOnly = String(i.scheduled_at).substring(0, 10);
+            if (dateOnly === todayIso && status === 'SCHEDULED') todayCount++;
+            const itemMs = new Date(i.scheduled_at).getTime();
+            if (itemMs > nowMs && itemMs <= nowMs + oneWeekMs && status === 'SCHEDULED') upcomingCount++;
+          }
+        });
+
+        const setV = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+        setV('int-stat-today', todayCount);
+        setV('int-stat-upcoming', upcomingCount);
+        setV('int-stat-completed', completedCount);
+        setV('int-stat-other', otherCount);
+      }
+
+      function getBadgeClass(status) {
+        const s = (status || '').toUpperCase();
+        if (s === 'SCHEDULED') return 'badge-scheduled';
+        if (s === 'COMPLETED') return 'badge-active';
+        if (s === 'RESCHEDULED') return 'badge-rescheduled';
+        if (s === 'NO_SHOW' || s === 'CANCELLED') return 'badge-rejected';
+        return 'badge-applied';
+      }
+
+      function renderTable(list) {
+        if (!tableBody) return;
+        if (!list || list.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding: 24px; color:#64748b;">No interviews found.</td></tr>';
+          if (countBadge) countBadge.textContent = 'Showing 0 Records';
+          return;
+        }
+
+        if (countBadge) countBadge.textContent = `Showing ${list.length} Records`;
+
+        tableBody.innerHTML = list.map(item => {
+          const intCode = 'INT' + (1000 + (item.round_id || 0));
+          const candName = Api.escapeHtml(item.candidate_name || 'Candidate #' + item.candidate_id);
+          const candCode = Api.escapeHtml(item.candidate_code || ('CAN' + item.candidate_id));
+          const compName = Api.escapeHtml(item.company_name || 'N/A');
+          const jobTitle = Api.escapeHtml(item.job_title || 'N/A');
+          const roundName = Api.escapeHtml(item.round_name || 'Technical');
+          const schedTime = Api.formatDateTime(item.scheduled_at);
+          const mode = Api.escapeHtml(item.interview_mode || 'ONLINE');
+          const interviewer = Api.escapeHtml(item.interviewer_name || 'Assessment Panel');
+          const status = (item.round_status || 'SCHEDULED').toUpperCase();
+          const badgeClass = getBadgeClass(status);
+
+          let actionButtons = '';
+          if (status === 'SCHEDULED') {
+            actionButtons = `
+              <a href="placement-process.html?round_id=${item.round_id}&candidate_id=${item.candidate_id}&job_id=${item.job_id}" class="btn btn-primary btn-sm">Add Feedback</a>
+              <button type="button" class="btn btn-outline btn-sm" onclick="markNoShow(${item.round_id})">Mark No Show</button>
+            `;
+          } else if (status === 'COMPLETED') {
+            actionButtons = `
+              <a href="placement-process.html?candidate_id=${item.candidate_id}&job_id=${item.job_id}" class="btn btn-outline btn-sm">View Feedback</a>
+            `;
+          } else {
+            actionButtons = `<span style="font-size:12px;color:#64748b;">${status}</span>`;
+          }
+
+          return `
+            <tr>
+              <td><strong>${intCode}</strong></td>
+              <td>
+                <a href="candidate-details.html?id=${item.candidate_id}"><strong>${candName}</strong></a><br>
+                <span style="font-size:11px;color:#64748b;">${candCode}</span>
+              </td>
+              <td>${compName}</td>
+              <td>${jobTitle}</td>
+              <td>${roundName}</td>
+              <td>${schedTime}</td>
+              <td>${mode}</td>
+              <td>${interviewer}</td>
+              <td><span class="badge ${badgeClass}">${status}</span></td>
+              <td>
+                <div class="table-actions">
+                  ${actionButtons}
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      window.markNoShow = async function(roundId) {
+        if (!confirm('Mark candidate as No Show for this interview round?')) return;
+        try {
+          await Api.submitFeedback(roundId, {
+            recommendation: 'REJECTED',
+            rating: 1.0,
+            feedback: 'Candidate did not attend scheduled interview round (No Show).'
+          });
+          Api.showAlert('Interview marked as No Show', 'warning');
+          await loadInterviews();
+        } catch (err) {
+          Api.showAlert(err.message || 'Failed to update interview', 'danger');
+        }
+      };
+
+      async function loadInterviews() {
+        try {
+          interviewsList = await Api.getInterviews();
+          updateKPIs(interviewsList);
+          applyFilter();
+        } catch (err) {
+          console.error('Error fetching interviews:', err);
+          if (tableBody) {
+            tableBody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding: 24px; color:#dc2626;">Failed to load interviews: ${Api.escapeHtml(err.message)}</td></tr>`;
+          }
+        }
+      }
+
+      function applyFilter() {
+        const cQuery = (filterCandidate ? filterCandidate.value : '').toLowerCase().trim();
+        const coQuery = (filterCompany ? filterCompany.value : '').toLowerCase().trim();
+        const rQuery = (filterRound ? filterRound.value : '').toLowerCase().trim();
+        const dQuery = (filterDate ? filterDate.value : '').trim();
+
+        const filtered = interviewsList.filter(item => {
+          const cName = (item.candidate_name || '').toLowerCase();
+          const coName = (item.company_name || '').toLowerCase();
+          const rName = (item.round_name || '').toLowerCase();
+          const dStr = String(item.scheduled_at || '').substring(0, 10);
+
+          const matchesCand = !cQuery || cName.includes(cQuery);
+          const matchesComp = !coQuery || coName.includes(coQuery);
+          const matchesRound = !rQuery || rName.includes(rQuery);
+          const matchesDate = !dQuery || dStr === dQuery;
+
+          return matchesCand && matchesComp && matchesRound && matchesDate;
+        });
+
+        renderTable(filtered);
+      }
+
+      if (btnSearchFilter) btnSearchFilter.addEventListener('click', applyFilter);
+      if (filterCandidate) filterCandidate.addEventListener('keyup', (e) => { if (e.key === 'Enter') applyFilter(); });
+      if (btnResetFilter) btnResetFilter.addEventListener('click', () => {
+        if (filterCandidate) filterCandidate.value = '';
+        if (filterCompany) filterCompany.value = '';
+        if (filterRound) filterRound.value = '';
+        if (filterDate) filterDate.value = '';
+        applyFilter();
+      });
+
+      // Schedule form submission
+      if (scheduleForm) {
+        scheduleForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const candId = candSelect.value;
+          const jId = jobSelect.value;
+          const roundName = roundSelect.value;
+          const iDate = dateInput.value;
+          const iTime = timeInput.value || '10:00';
+          const mode = modeSelect.value;
+          const interviewer = interviewerInput.value;
+
+          if (!candId || !jId || !iDate) {
+            Api.showAlert('Please fill in candidate, job, and interview date.', 'warning');
+            return;
+          }
+
+          if (iDate < todayStr) {
+            if (dateValMsg) dateValMsg.style.display = 'block';
+            Api.showAlert('Interview date cannot be in the past.', 'danger');
+            return;
+          } else {
+            if (dateValMsg) dateValMsg.style.display = 'none';
+          }
+
+          const scheduledAt = `${iDate} ${iTime}:00`;
+          const btnSchedule = document.getElementById('btnSchedule');
+          if (btnSchedule) { btnSchedule.disabled = true; btnSchedule.textContent = 'Scheduling...'; }
+
+          try {
+            await Api.scheduleInterview({
+              candidate_id: parseInt(candId, 10),
+              job_id: parseInt(jId, 10),
+              application_id: prefillAppId ? parseInt(prefillAppId, 10) : undefined,
+              round_name: roundName,
+              scheduled_at: scheduledAt,
+              interview_mode: mode,
+              interview_location: mode === 'ONLINE' ? 'Virtual Meeting' : 'Campus Placement Cell',
+              interviewer_name: interviewer
+            });
+            Api.showAlert('Interview scheduled successfully!', 'success');
+            scheduleForm.reset();
+            if (dateInput) dateInput.value = todayStr;
+            await loadInterviews();
+          } catch (err) {
+            Api.showAlert(err.message || 'Failed to schedule interview', 'danger');
+          } finally {
+            if (btnSchedule) { btnSchedule.disabled = false; btnSchedule.textContent = 'Schedule'; }
+          }
+        });
+      }
+
+      await loadMasterData();
+      await loadInterviews();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create/Edit Job - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link active">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="jobs.html">Jobs</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Create/Edit Job</span>
+          </div>
+          <h2 class="page-title">Create/Edit Job</h2>
+        </div>
+        <div class="page-actions">
+          <a href="jobs.html" class="btn btn-outline">&larr; Back to Jobs</a>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> Infosys | Associate Java Developer | 60% | 2024-2026 | 0 Backlogs | 4.5-6 LPA
+      </div>
+
+      <!-- Prototype Validation Display Section -->
+      <div class="validation-notice">
+        <div>
+          <strong>Job Form Validation Messages to Demonstrate:</strong>
+          <ul style="margin-left: 20px; margin-top: 4px;">
+            <li>Number of openings must be greater than zero.</li>
+            <li>Application deadline cannot be before posted date.</li>
+            <li>Minimum package cannot exceed maximum package.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Job Form Card -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Job Opening &amp; Eligibility Criteria Specification</h3>
+            <p class="card-subtitle">Define position parameters, qualification cutoffs, and application window</p>
+          </div>
+          <span class="badge badge-open">STATUS: OPEN</span>
+        </div>
+        <div class="card-body">
+          <form id="jobForm" onsubmit="return false;">
+            
+            <!-- Section A: Basic Information -->
+            <h4 class="form-section-header">Basic Information</h4>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="jobCompany" class="form-label">Company <span class="req">*</span></label>
+                <select id="jobCompany" name="company" class="form-control" required>
+                  <option value="">-- Select Company --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="jobTitle" class="form-label">Job Title <span class="req">*</span></label>
+                <input type="text" id="jobTitle" name="jobTitle" class="form-control" placeholder="Position title" required>
+              </div>
+              <div class="form-group">
+                <label for="location" class="form-label">Location <span class="req">*</span></label>
+                <input type="text" id="location" name="location" class="form-control" placeholder="e.g. Pune, Mumbai" required>
+              </div>
+            </div>
+
+            <div class="form-grid-3" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="openings" class="form-label">Number of Openings <span class="req">*</span></label>
+                <input type="number" id="openings" name="openings" class="form-control" value="1" min="1" placeholder="Must be > 0" required>
+              </div>
+              <div class="form-group">
+                <label for="employmentType" class="form-label">Employment Type <span class="req">*</span></label>
+                <select id="employmentType" name="employmentType" class="form-control" required>
+                  <option value="PERMANENT" selected>PERMANENT</option>
+                  <option value="CONTRACT">CONTRACT</option>
+                  <option value="FULL_TIME">FULL_TIME</option>
+                  <option value="INTERNSHIP">INTERNSHIP</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="jobType" class="form-label">Job Type <span class="req">*</span></label>
+                <select id="jobType" name="jobType" class="form-control" required>
+                  <option value="FULL_TIME" selected>FULL_TIME</option>
+                  <option value="INTERNSHIP">INTERNSHIP</option>
+                  <option value="PART_TIME">PART_TIME</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Section B: Compensation -->
+            <h4 class="form-section-header">Compensation (Annual Salary)</h4>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="minSalary" class="form-label">Minimum Annual Salary (₹)</label>
+                <input type="number" id="minSalary" name="minSalary" class="form-control" placeholder="e.g. 350000" step="10000">
+              </div>
+              <div class="form-group">
+                <label for="maxSalary" class="form-label">Maximum Annual Salary (₹)</label>
+                <input type="number" id="maxSalary" name="maxSalary" class="form-control" placeholder="e.g. 600000" step="10000">
+              </div>
+            </div>
+
+            <!-- Section C: Eligibility Criteria -->
+            <h4 class="form-section-header">Eligibility Criteria</h4>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="qualification" class="form-label">Required Qualification <span class="req">*</span></label>
+                <select id="qualification" name="qualification" class="form-control" required>
+                  <option value="B.Tech" selected>B.Tech</option>
+                  <option value="B.E.">B.E.</option>
+                  <option value="BE">BE</option>
+                  <option value="BTech">BTech</option>
+                  <option value="MCA">MCA</option>
+                  <option value="BSc">BSc</option>
+                  <option value="Any Graduate">Any Graduate</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="minPercentage" class="form-label">Minimum Percentage (%) <span class="req">*</span></label>
+                <input type="number" id="minPercentage" name="minPercentage" class="form-control" value="60" min="0" max="100" step="0.1" required>
+              </div>
+              <div class="form-group">
+                <label for="maxBacklogs" class="form-label">Maximum Backlogs Allowed <span class="req">*</span></label>
+                <input type="number" id="maxBacklogs" name="maxBacklogs" class="form-control" value="0" min="0" required>
+              </div>
+            </div>
+
+            <!-- Section D: Job Description & Details -->
+            <h4 class="form-section-header">Description &amp; Important Dates</h4>
+            <div class="form-group">
+              <label for="jobDesc" class="form-label">Job Description</label>
+              <textarea id="jobDesc" name="jobDesc" class="form-control" rows="3" placeholder="Detailed position description and role expectations"></textarea>
+            </div>
+
+            <div class="form-grid-2" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="deadline" class="form-label">Application Deadline</label>
+                <input type="date" id="deadline" name="deadline" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="status" class="form-label">Job Status <span class="req">*</span></label>
+                <select id="status" name="status" class="form-control" required>
+                  <option value="OPEN" selected>OPEN</option>
+                  <option value="DRAFT">DRAFT</option>
+                  <option value="CLOSED">CLOSED</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="filter-actions" style="margin-top: 24px;">
+              <button type="submit" id="saveJobBtn" class="btn btn-primary">Save Job</button>
+              <a href="jobs.html" class="btn btn-outline">Cancel</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const jobId = urlParams.get('id');
+
+    async function initJobForm() {
+      // Load companies
+      try {
+        const companies = await Api.getCompanies();
+        const select = document.getElementById('jobCompany');
+        select.innerHTML = '<option value="">-- Select Company --</option>' +
+          companies.map(c => `<option value="${c.company_id}">${escapeHtml(c.company_name)} (${escapeHtml(c.headquarters || 'India')})</option>`).join('');
+
+        if (jobId) {
+          document.querySelector('.card-title').textContent = `Job Mandate Update (ID: JOB-${jobId})`;
+          document.getElementById('saveJobBtn').textContent = 'Update Job';
+
+          const j = await Api.getJobById(jobId);
+          select.value = j.company_id;
+          document.getElementById('jobTitle').value = j.job_title || '';
+          document.getElementById('location').value = j.work_location || '';
+          document.getElementById('openings').value = j.openings || 1;
+          document.getElementById('employmentType').value = j.employment_type || 'PERMANENT';
+          document.getElementById('jobType').value = j.job_type || 'FULL_TIME';
+          document.getElementById('minSalary').value = j.min_salary || '';
+          document.getElementById('maxSalary').value = j.max_salary || '';
+          document.getElementById('qualification').value = j.required_qualification || 'B.Tech';
+          document.getElementById('minPercentage').value = j.minimum_percentage != null ? j.minimum_percentage : 60;
+          document.getElementById('maxBacklogs').value = j.maximum_backlogs != null ? j.maximum_backlogs : 0;
+          document.getElementById('jobDesc').value = j.job_description || '';
+          if (j.application_deadline) {
+            document.getElementById('deadline').value = j.application_deadline.substring(0, 10);
+          }
+          document.getElementById('status').value = j.job_status || 'OPEN';
+        }
+      } catch (err) {
+        console.error('Error initializing job form:', err);
+        showNotification('Failed to load form data: ' + err.message, 'error');
+      }
+    }
+
+    document.getElementById('jobForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const companyId = document.getElementById('jobCompany').value;
+      const jobTitle = document.getElementById('jobTitle').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const minSal = document.getElementById('minSalary').value;
+      const maxSal = document.getElementById('maxSalary').value;
+
+      if (!companyId) {
+        showNotification('Please select a company.', 'error');
+        return;
+      }
+      if (!jobTitle) {
+        showNotification('Job title is required.', 'error');
+        return;
+      }
+      if (minSal && maxSal && parseFloat(minSal) > parseFloat(maxSal)) {
+        showNotification('Minimum salary cannot exceed maximum salary.', 'error');
+        return;
+      }
+
+      const payload = {
+        companyId: parseInt(companyId),
+        jobTitle,
+        workLocation: location,
+        openings: parseInt(document.getElementById('openings').value || 1),
+        employmentType: document.getElementById('employmentType').value,
+        jobType: document.getElementById('jobType').value,
+        minSalary: minSal ? parseFloat(minSal) : null,
+        maxSalary: maxSal ? parseFloat(maxSal) : null,
+        requiredQualification: document.getElementById('qualification').value,
+        minimumPercentage: parseFloat(document.getElementById('minPercentage').value || 0),
+        maximumBacklogs: parseInt(document.getElementById('maxBacklogs').value || 0),
+        jobDescription: document.getElementById('jobDesc').value.trim(),
+        applicationDeadline: document.getElementById('deadline').value || null,
+        jobStatus: document.getElementById('status').value
+      };
+
+      const btn = document.getElementById('saveJobBtn');
+      btn.disabled = true;
+
+      try {
+        if (jobId) {
+          await Api.updateJob(jobId, payload);
+          showNotification('Job opening updated successfully!', 'success');
+        } else {
+          await Api.createJob(payload);
+          showNotification('Job opening posted successfully to MySQL!', 'success');
+        }
+
+        setTimeout(() => {
+          window.location.href = 'jobs.html';
+        }, 1200);
+      } catch (err) {
+        console.error('Error saving job:', err);
+        showNotification('Error saving job opening: ' + err.message, 'error');
+        btn.disabled = false;
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', initJobForm);
+  </script>
+</body>
+</html>

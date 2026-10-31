@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selection, Offer &amp; Placement Process - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link active">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Placement Process</span>
+          </div>
+          <h2 class="page-title">Selection, Offer &amp; Placement Process</h2>
+        </div>
+        <div class="page-actions">
+          <a href="reports.html" class="btn btn-outline">Reports &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> Rahul Patil | SELECTED | Java Developer | 5.2 LPA | Offer ACCEPTED | Joining 01-Dec-2026
+      </div>
+
+      <!-- Candidate selector for Placement Workflow -->
+      <div class="card" style="margin-bottom: 16px; padding: 12px 16px;">
+        <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+          <label for="selectProcessCandidate" style="font-weight:600; font-size:14px; margin-bottom:0;">Select Candidate for Placement Workflow:</label>
+          <select id="selectProcessCandidate" class="form-control" style="max-width:360px;">
+            <option value="">-- Loading Candidates --</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section: Candidate and job summary banner -->
+      <div class="profile-summary-header">
+        <div class="profile-main-meta">
+          <div id="bannerAvatar" class="profile-avatar-large">RP</div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <h3 id="bannerName" class="profile-name">Loading candidate...</h3>
+              <span id="bannerSelectedBadge" class="badge badge-selected">SELECTED</span>
+              <span id="bannerOfferBadge" class="badge badge-accepted">Offer STATUS</span>
+            </div>
+            <div id="bannerIdTag" class="profile-id-tag">Candidate ID: ...</div>
+            <div class="profile-meta-pills">
+              <span class="meta-pill"><strong>Designation:</strong> <span id="bannerDesignation">...</span></span>
+              <span class="meta-pill"><strong>Offered Package:</strong> <span id="bannerPackage">...</span></span>
+              <span class="meta-pill"><strong>Joining:</strong> <span id="bannerJoining">...</span></span>
+              <span class="meta-pill"><strong>Status:</strong> <span id="bannerStatus">...</span></span>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; align-items: flex-end;">
+          <a id="bannerProfileLink" href="candidates.html" class="btn btn-primary btn-sm">Candidate profile</a>
+          <a href="reports.html" class="btn btn-outline btn-sm">Reports</a>
+        </div>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="tabs-nav">
+        <a href="#tab1-feedback" class="tab-btn active" onclick="activateTab('tab1-feedback', event)">Tab 1: Interview Feedback</a>
+        <a href="#tab2-offer" class="tab-btn" onclick="activateTab('tab2-offer', event)">Tab 2: Offer Details</a>
+        <a href="#tab3-joining" class="tab-btn" onclick="activateTab('tab3-joining', event)">Tab 3: Joining / Placement</a>
+      </div>
+
+      <!-- Section: Tab 1: Interview Feedback -->
+      <div class="card tab-pane active" id="tab1-feedback">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Tab 1: Interview Feedback</h3>
+            <p class="card-subtitle">Technical, communication, and problem-solving assessment scorecards</p>
+          </div>
+          <span id="tab1ResultBadge" class="badge badge-active">RESULT: PENDING</span>
+        </div>
+        <div class="card-body">
+          <form id="feedbackForm" onsubmit="return false;">
+            <div class="form-grid-4">
+              <div class="form-group">
+                <label for="techRating" class="form-label">Technical Rating</label>
+                <select id="techRating" name="techRating" class="form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5" selected>5</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="commRating" class="form-label">Communication Rating</label>
+                <select id="commRating" name="commRating" class="form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4" selected>4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="problemRating" class="form-label">Problem Solving Rating</label>
+                <select id="problemRating" name="problemRating" class="form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4" selected>4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="overallRating" class="form-label">Overall Rating</label>
+                <select id="overallRating" name="overallRating" class="form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4" selected>4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-top: 16px;">
+              <div class="form-group">
+                <label for="feedbackRemarks" class="form-label">Feedback Remarks</label>
+                <textarea id="feedbackRemarks" name="feedbackRemarks" class="form-control" rows="3">Demonstrated strong technical acumen and communication during assessment.</textarea>
+              </div>
+              <div class="form-group">
+                <label for="interviewResult" class="form-label">Interview Result <span class="req">*</span></label>
+                <select id="interviewResult" name="interviewResult" class="form-control" required>
+                  <option value="PASS" selected>SELECTED (PASS)</option>
+                  <option value="NEXT_ROUND">NEXT_ROUND</option>
+                  <option value="ON_HOLD">ON_HOLD</option>
+                  <option value="REJECTED">REJECTED</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-actions" style="margin-top: 18px;">
+              <button type="submit" id="btnSaveFeedback" class="btn btn-primary">Save Feedback</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Section: Tab 2: Offer Details -->
+      <div class="card tab-pane" id="tab2-offer" style="display:none;">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Tab 2: Offer Details</h3>
+            <p class="card-subtitle">Employment role, annual compensation, offer timeline, and candidate acceptance</p>
+          </div>
+          <span id="tab2OfferStatusBadge" class="badge badge-accepted">OFFER STATUS: PENDING</span>
+        </div>
+        <div class="card-body">
+          <form id="offerForm" onsubmit="return false;">
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="offerDesignation" class="form-label">Designation <span class="req">*</span></label>
+                <input type="text" id="offerDesignation" name="designation" class="form-control" value="Associate Software Engineer" placeholder="Offered position" required>
+              </div>
+              <div class="form-group">
+                <label for="offeredPackage" class="form-label">Offered Package (LPA) <span class="req">*</span></label>
+                <input type="number" id="offeredPackage" name="offeredPackage" class="form-control" value="5.2" step="0.1" min="0" placeholder="e.g. 5.2 LPA" required>
+              </div>
+              <div class="form-group">
+                <label for="offerDate" class="form-label">Offer Date <span class="req">*</span></label>
+                <input type="date" id="offerDate" name="offerDate" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="expectedJoiningDate" class="form-label">Expected Joining Date</label>
+                <input type="date" id="expectedJoiningDate" name="expectedJoiningDate" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="offerStatus" class="form-label">Offer Status</label>
+                <select id="offerStatus" name="offerStatus" class="form-control">
+                  <option value="OFFERED" selected>OFFERED</option>
+                  <option value="ACCEPTED">ACCEPTED</option>
+                  <option value="REJECTED">REJECTED</option>
+                  <option value="EXPIRED">EXPIRED</option>
+                  <option value="WITHDRAWN">WITHDRAWN</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-actions" style="margin-top: 18px;">
+              <button type="button" id="btnCreateOffer" class="btn btn-primary">Create Offer</button>
+              <button type="button" id="btnUpdateOfferStatus" class="btn btn-success">Update Offer Status</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Section: Tab 3: Joining / Placement -->
+      <div class="card tab-pane" id="tab3-joining" style="display:none;">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Tab 3: Joining / Placement</h3>
+            <p class="card-subtitle">Actual reporting date and final placement confirmation</p>
+          </div>
+          <span id="tab3JoiningBadge" class="badge badge-scheduled">STATUS: PENDING</span>
+        </div>
+        <div class="card-body">
+          <form id="joiningForm" onsubmit="return false;">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="actualJoiningDate" class="form-label">Actual Joining Date <span class="req">*</span></label>
+                <input type="date" id="actualJoiningDate" name="actualJoiningDate" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="joiningStatus" class="form-label">Joining Status <span class="req">*</span></label>
+                <select id="joiningStatus" name="joiningStatus" class="form-control" required>
+                  <option value="JOINED" selected>JOINED</option>
+                  <option value="NOT_JOINED">NOT_JOINED</option>
+                  <option value="DEFERRED">DEFERRED</option>
+                  <option value="NO_SHOW">NO_SHOW</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-actions" style="margin-top: 18px;">
+              <button type="button" id="btnConfirmJoining" class="btn btn-primary">Confirm Joining</button>
+              <button type="button" id="btnMarkPlaced" class="btn btn-success">Mark Placed</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Placement Summary Register Table -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Placement Records History</h3>
+            <p class="card-subtitle">Candidate offers, package levels, and onboarding confirmations</p>
+          </div>
+          <span id="placementCountBadge" style="font-size:12px;color:#64748b;">Showing Records</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Candidate</th>
+                <th>Company</th>
+                <th>Designation</th>
+                <th>Offered Package</th>
+                <th>Offer Status</th>
+                <th>Joining Date</th>
+                <th>Joining Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="placementHistoryTableBody">
+              <tr>
+                <td colspan="8" style="text-align:center; padding: 24px; color:#64748b;">Loading placement records...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    function activateTab(tabId, ev) {
+      if (ev) ev.preventDefault();
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => {
+        p.style.display = 'none';
+        p.classList.remove('active');
+      });
+
+      const clickedBtn = ev ? ev.currentTarget : document.querySelector(`.tab-btn[href="#${tabId}"]`);
+      if (clickedBtn) clickedBtn.classList.add('active');
+
+      const targetPane = document.getElementById(tabId);
+      if (targetPane) {
+        targetPane.style.display = 'block';
+        targetPane.classList.add('active');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      Api.updateNavUser();
+
+      const params = new URLSearchParams(window.location.search);
+      const urlCandidateId = params.get('candidate_id');
+      const urlRoundId = params.get('round_id');
+      const urlJobId = params.get('job_id');
+      const urlAppId = params.get('application_id');
+
+      const candSelect = document.getElementById('selectProcessCandidate');
+      const tableBody = document.getElementById('placementHistoryTableBody');
+      const countBadge = document.getElementById('placementCountBadge');
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      const offerDateInput = document.getElementById('offerDate');
+      const expectedJoiningInput = document.getElementById('expectedJoiningDate');
+      const actualJoiningInput = document.getElementById('actualJoiningDate');
+      if (offerDateInput) offerDateInput.value = todayStr;
+      if (actualJoiningInput) actualJoiningInput.value = todayStr;
+
+      let allCandidates = [];
+      let currentCandidate = null;
+      let currentApplication = null;
+      let currentRound = null;
+      let currentOffer = null;
+
+      async function init() {
+        try {
+          const [candidates, offers, placements] = await Promise.all([
+            Api.getCandidates(),
+            Api.getOffers(),
+            Api.getPlacements()
+          ]);
+
+          allCandidates = candidates || [];
+
+          if (candSelect) {
+            candSelect.innerHTML = '<option value="">-- Choose Candidate --</option>' +
+              allCandidates.map(c => `<option value="${c.candidate_id}">${Api.escapeHtml(c.first_name + ' ' + c.last_name)} (${c.candidate_code || 'CAN' + c.candidate_id}) - ${Api.escapeHtml(c.placement_status || 'UNPLACED')}</option>`).join('');
+          }
+
+          renderPlacementsTable(placements, offers);
+
+          // Select candidate: url parameter or first candidate
+          let targetCandidateId = urlCandidateId;
+          if (!targetCandidateId && allCandidates.length > 0) {
+            targetCandidateId = allCandidates[0].candidate_id;
+          }
+
+          if (targetCandidateId) {
+            if (candSelect) candSelect.value = targetCandidateId;
+            await loadCandidateDetails(targetCandidateId);
+          }
+        } catch (err) {
+          console.error('Initialization error:', err);
+        }
+      }
+
+      if (candSelect) {
+        candSelect.addEventListener('change', async () => {
+          if (candSelect.value) {
+            await loadCandidateDetails(candSelect.value);
+          }
+        });
+      }
+
+      async function loadCandidateDetails(candidateId) {
+        try {
+          const c = await Api.getCandidateById(candidateId);
+          currentCandidate = c;
+
+          // Fetch applications for this candidate
+          const apps = await Api.getCandidateApplications(candidateId);
+          currentApplication = apps && apps.length > 0 ? apps[0] : null;
+
+          // Fetch interview rounds for this candidate
+          const interviews = await Api.getInterviews({ candidateId: candidateId });
+          currentRound = (urlRoundId && interviews.find(i => String(i.round_id) === String(urlRoundId))) || (interviews.length > 0 ? interviews[0] : null);
+
+          // Fetch offers for this candidate
+          const offers = await Api.getOffers({ candidateId: candidateId });
+          currentOffer = offers && offers.length > 0 ? offers[0] : null;
+
+          // Update Banner
+          updateBanner(c, currentApplication, currentRound, currentOffer);
+
+          // Update Tab Form Defaults
+          if (currentOffer) {
+            const desigInput = document.getElementById('offerDesignation');
+            const salaryInput = document.getElementById('offeredPackage');
+            const statusSelect = document.getElementById('offerStatus');
+            if (desigInput && currentOffer.job_title) desigInput.value = currentOffer.job_title;
+            if (salaryInput && currentOffer.offered_salary) salaryInput.value = currentOffer.offered_salary;
+            if (statusSelect && currentOffer.offer_status) statusSelect.value = currentOffer.offer_status;
+            if (offerDateInput && currentOffer.offer_date) offerDateInput.value = String(currentOffer.offer_date).substring(0, 10);
+            if (expectedJoiningInput && currentOffer.joining_date) expectedJoiningInput.value = String(currentOffer.joining_date).substring(0, 10);
+            if (actualJoiningInput && currentOffer.joining_date) actualJoiningInput.value = String(currentOffer.joining_date).substring(0, 10);
+
+            const t2Badge = document.getElementById('tab2OfferStatusBadge');
+            if (t2Badge) t2Badge.textContent = 'OFFER STATUS: ' + (currentOffer.offer_status || 'OFFERED');
+          } else if (currentApplication) {
+            const desigInput = document.getElementById('offerDesignation');
+            if (desigInput && currentApplication.job_title) desigInput.value = currentApplication.job_title;
+          }
+        } catch (err) {
+          console.error('Error loading candidate details:', err);
+        }
+      }
+
+      function updateBanner(c, app, round, offer) {
+        const initials = ((c.first_name ? c.first_name[0] : '') + (c.last_name ? c.last_name[0] : '')).toUpperCase() || 'NA';
+        const fullName = `${c.first_name || ''} ${c.last_name || ''}`.trim() || 'Candidate #' + c.candidate_id;
+        const candCode = c.candidate_code || ('CAN' + c.candidate_id);
+        const jobInfo = app ? `${app.job_code || 'JOB' + app.job_id} (${app.company_name || 'N/A'})` : 'No active application';
+        const intInfo = round ? ('INT' + (1000 + round.round_id)) : 'Pending';
+
+        const bannerAvatar = document.getElementById('bannerAvatar');
+        const bannerName = document.getElementById('bannerName');
+        const bannerIdTag = document.getElementById('bannerIdTag');
+        const bannerDesig = document.getElementById('bannerDesignation');
+        const bannerPkg = document.getElementById('bannerPackage');
+        const bannerJoin = document.getElementById('bannerJoining');
+        const bannerStat = document.getElementById('bannerStatus');
+        const bannerSelBadge = document.getElementById('bannerSelectedBadge');
+        const bannerOffBadge = document.getElementById('bannerOfferBadge');
+        const bannerLink = document.getElementById('bannerProfileLink');
+
+        if (bannerAvatar) bannerAvatar.textContent = initials;
+        if (bannerName) bannerName.textContent = fullName;
+        if (bannerIdTag) bannerIdTag.textContent = `Candidate ID: ${candCode} • Job: ${jobInfo} • Interview: ${intInfo}`;
+        if (bannerDesig) bannerDesig.textContent = (offer && offer.job_title) || (app && app.job_title) || c.primary_technology || 'Software Engineer';
+        if (bannerPkg) bannerPkg.textContent = offer && offer.offered_salary ? `${offer.offered_salary} LPA` : 'Pending';
+        if (bannerJoin) bannerJoin.textContent = offer && offer.joining_date ? Api.formatDate(offer.joining_date) : 'Pending';
+        if (bannerStat) bannerStat.textContent = c.placement_status || 'UNPLACED';
+
+        if (bannerSelBadge) {
+          bannerSelBadge.textContent = app ? (app.status || 'APPLIED') : 'NEW';
+        }
+        if (bannerOffBadge) {
+          bannerOffBadge.textContent = offer ? ('Offer ' + offer.offer_status) : (c.placement_status || 'UNPLACED');
+        }
+        if (bannerLink) {
+          bannerLink.href = `candidate-details.html?id=${c.candidate_id}`;
+        }
+      }
+
+      function renderPlacementsTable(placements, offers) {
+        if (!tableBody) return;
+        const records = placements && placements.length > 0 ? placements : offers;
+        if (!records || records.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 24px; color:#64748b;">No placement records found.</td></tr>';
+          if (countBadge) countBadge.textContent = 'Showing 0 Records';
+          return;
+        }
+
+        if (countBadge) countBadge.textContent = `Showing ${records.length} Verified Records`;
+
+        tableBody.innerHTML = records.map(p => {
+          const candName = Api.escapeHtml(p.candidate_name || 'Candidate #' + p.candidate_id);
+          const candCode = Api.escapeHtml(p.candidate_code || ('CAN' + p.candidate_id));
+          const compName = Api.escapeHtml(p.company_name || 'N/A');
+          const desig = Api.escapeHtml(p.job_title || p.designation || 'Software Engineer');
+          const salaryVal = p.salary != null ? p.salary : (p.offered_salary != null ? p.offered_salary : null);
+          const pkg = salaryVal ? `${salaryVal} LPA` : 'N/A';
+          const offerStat = (p.offer_status || 'ACCEPTED').toUpperCase();
+          const joinDate = Api.formatDate(p.joining_date || p.placement_date);
+          const joinStat = (p.placement_status || (offerStat === 'ACCEPTED' ? 'JOINED' : 'PENDING')).toUpperCase();
+
+          const offerBadgeClass = offerStat === 'ACCEPTED' ? 'badge-accepted' : (offerStat === 'OFFERED' ? 'badge-offered' : 'badge-rejected');
+          const joinBadgeClass = joinStat === 'JOINED' ? 'badge-joined' : (joinStat === 'DEFERRED' ? 'badge-deferred' : 'badge-inactive');
+
+          return `
+            <tr>
+              <td>
+                <a href="candidate-details.html?id=${p.candidate_id}"><strong>${candName}</strong></a><br>
+                <span style="font-size:11px;color:#64748b;">${candCode}</span>
+              </td>
+              <td>${compName}</td>
+              <td>${desig}</td>
+              <td>${pkg}</td>
+              <td><span class="badge ${offerBadgeClass}">${offerStat}</span></td>
+              <td>${joinDate}</td>
+              <td><span class="badge ${joinBadgeClass}">${joinStat}</span></td>
+              <td>
+                <a href="candidate-details.html?id=${p.candidate_id}" class="btn btn-outline btn-sm">Candidate profile</a>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Tab 1: Submit Feedback
+      const btnSaveFeedback = document.getElementById('btnSaveFeedback');
+      if (btnSaveFeedback) {
+        btnSaveFeedback.addEventListener('click', async () => {
+          if (!currentRound && !urlRoundId) {
+            Api.showAlert('No scheduled interview round found for this candidate. Please schedule an interview first.', 'warning');
+            return;
+          }
+
+          const roundId = currentRound ? currentRound.round_id : parseInt(urlRoundId, 10);
+          const techRating = parseFloat(document.getElementById('techRating').value || '4');
+          const commRating = parseFloat(document.getElementById('commRating').value || '4');
+          const probRating = parseFloat(document.getElementById('problemRating').value || '4');
+          const overallRating = parseFloat(document.getElementById('overallRating').value || '4');
+          const remarks = document.getElementById('feedbackRemarks').value;
+          const result = document.getElementById('interviewResult').value;
+
+          btnSaveFeedback.disabled = true;
+          btnSaveFeedback.textContent = 'Saving...';
+
+          try {
+            await Api.submitFeedback(roundId, {
+              rating: overallRating,
+              technical_score: techRating,
+              communication_score: commRating,
+              problem_solving_score: probRating,
+              feedback: remarks,
+              recommendation: result
+            });
+            Api.showAlert('Interview feedback saved successfully! Result: ' + result, 'success');
+            const t1Badge = document.getElementById('tab1ResultBadge');
+            if (t1Badge) t1Badge.textContent = 'RESULT: ' + result;
+            if (currentCandidate) await loadCandidateDetails(currentCandidate.candidate_id);
+          } catch (err) {
+            Api.showAlert(err.message || 'Failed to save feedback', 'danger');
+          } finally {
+            btnSaveFeedback.disabled = false;
+            btnSaveFeedback.textContent = 'Save Feedback';
+          }
+        });
+      }
+
+      // Tab 2: Create Offer
+      const btnCreateOffer = document.getElementById('btnCreateOffer');
+      if (btnCreateOffer) {
+        btnCreateOffer.addEventListener('click', async () => {
+          if (!currentApplication) {
+            Api.showAlert('No active application found for this candidate to create an offer.', 'warning');
+            return;
+          }
+
+          const desig = document.getElementById('offerDesignation').value;
+          const pkg = parseFloat(document.getElementById('offeredPackage').value);
+          const oDate = document.getElementById('offerDate').value;
+          const jDate = document.getElementById('expectedJoiningDate').value;
+          const status = document.getElementById('offerStatus').value;
+
+          if (!pkg || isNaN(pkg)) {
+            Api.showAlert('Please provide a valid package amount (LPA).', 'warning');
+            return;
+          }
+
+          btnCreateOffer.disabled = true;
+          btnCreateOffer.textContent = 'Creating...';
+
+          try {
+            const offerRes = await Api.createOffer({
+              application_id: currentApplication.application_id,
+              offered_salary: pkg,
+              offer_date: oDate,
+              joining_date: jDate || undefined,
+              offer_status: status,
+              remarks: `Offered for ${desig}`
+            });
+            Api.showAlert('Offer created successfully!', 'success');
+            currentOffer = offerRes;
+            if (currentCandidate) await loadCandidateDetails(currentCandidate.candidate_id);
+            const [placements, offers] = await Promise.all([Api.getPlacements(), Api.getOffers()]);
+            renderPlacementsTable(placements, offers);
+          } catch (err) {
+            Api.showAlert(err.message || 'Failed to create offer', 'danger');
+          } finally {
+            btnCreateOffer.disabled = false;
+            btnCreateOffer.textContent = 'Create Offer';
+          }
+        });
+      }
+
+      // Tab 2: Update Offer Status
+      const btnUpdateOfferStatus = document.getElementById('btnUpdateOfferStatus');
+      if (btnUpdateOfferStatus) {
+        btnUpdateOfferStatus.addEventListener('click', async () => {
+          if (!currentOffer) {
+            Api.showAlert('No existing offer found for this candidate. Please click "Create Offer" first.', 'warning');
+            return;
+          }
+
+          const status = document.getElementById('offerStatus').value;
+          const jDate = document.getElementById('expectedJoiningDate').value;
+
+          btnUpdateOfferStatus.disabled = true;
+          btnUpdateOfferStatus.textContent = 'Updating...';
+
+          try {
+            await Api.updateOfferStatus(currentOffer.offer_id, status, jDate, 'Offer status updated via placement console');
+            Api.showAlert(`Offer status updated to ${status}!`, 'success');
+            if (currentCandidate) await loadCandidateDetails(currentCandidate.candidate_id);
+            const [placements, offers] = await Promise.all([Api.getPlacements(), Api.getOffers()]);
+            renderPlacementsTable(placements, offers);
+          } catch (err) {
+            Api.showAlert(err.message || 'Failed to update offer status', 'danger');
+          } finally {
+            btnUpdateOfferStatus.disabled = false;
+            btnUpdateOfferStatus.textContent = 'Update Offer Status';
+          }
+        });
+      }
+
+      // Tab 3: Confirm Joining / Mark Placed
+      const btnConfirmJoining = document.getElementById('btnConfirmJoining');
+      const btnMarkPlaced = document.getElementById('btnMarkPlaced');
+
+      async function handlePlacementConfirmation(stat) {
+        if (!currentOffer) {
+          Api.showAlert('Candidate must have an offer before confirming joining.', 'warning');
+          return;
+        }
+
+        const jDate = document.getElementById('actualJoiningDate').value || todayStr;
+
+        try {
+          await Api.createPlacement({
+            offer_id: currentOffer.offer_id,
+            candidate_id: currentCandidate.candidate_id,
+            job_id: currentOffer.job_id || (currentApplication ? currentApplication.job_id : undefined),
+            actual_joining_date: jDate,
+            placement_status: stat,
+            remarks: 'Onboarding confirmed via placement console'
+          });
+          Api.showAlert(`Candidate placement confirmed (${stat})!`, 'success');
+          if (currentCandidate) await loadCandidateDetails(currentCandidate.candidate_id);
+          const [placements, offers] = await Promise.all([Api.getPlacements(), Api.getOffers()]);
+          renderPlacementsTable(placements, offers);
+        } catch (err) {
+          Api.showAlert(err.message || 'Failed to confirm joining', 'danger');
+        }
+      }
+
+      if (btnConfirmJoining) {
+        btnConfirmJoining.addEventListener('click', () => {
+          const stat = document.getElementById('joiningStatus').value || 'JOINED';
+          handlePlacementConfirmation(stat);
+        });
+      }
+
+      if (btnMarkPlaced) {
+        btnMarkPlaced.addEventListener('click', () => {
+          handlePlacementConfirmation('JOINED');
+        });
+      }
+
+      await init();
+    });
+  </script>
+</body>
+</html>

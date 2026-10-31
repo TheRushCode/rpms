@@ -1,0 +1,12 @@
+target/
+.git/
+.github/
+.idea/
+.vscode/
+*.log
+.env
+*.env
+application-local.properties
+src/main/resources/application-local.properties
+Dockerfile
+.dockerignore

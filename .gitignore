@@ -1,0 +1,38 @@
+# Compiled Class files and Maven Build Artifacts
+**/target/
+**/bin/
+*.class
+*.jar
+*.war
+*.ear
+
+# IDE and Project Files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+.nb-gradle/
+.factorypath
+
+# Local Environment and Secret Files
+.env
+*.env
+**/*application-local.properties
+**/application-local.properties
+
+# Logs
+*.log
+**/logs/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Sensitive Database Dumps / Temporary Backups
+*.sql.bak
+*.dump

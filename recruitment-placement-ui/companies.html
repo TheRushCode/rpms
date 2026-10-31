@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companies - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link active">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Companies</span>
+          </div>
+          <h2 class="page-title">Companies</h2>
+        </div>
+        <div class="page-actions">
+          <a href="#companyFormCard" class="btn btn-primary">+ Add Company</a>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> COM101 | Infosys | IT Services | Pune | ACTIVE | 4 Open Jobs
+      </div>
+
+      <!-- Section: Company Search/Filter -->
+      <div class="filter-panel">
+        <h3 class="filter-title">Company search/filter</h3>
+        <form id="companyFilterForm" onsubmit="return false;">
+          <div class="filter-grid">
+            <div class="form-group">
+              <label for="companySearchName" class="form-label">Company Name</label>
+              <input type="text" id="companySearchName" name="companyName" class="form-control" placeholder="Search company">
+            </div>
+            <div class="form-group">
+              <label for="companySearchIndustry" class="form-label">Industry</label>
+              <input type="text" id="companySearchIndustry" name="industry" class="form-control" placeholder="Search industry">
+            </div>
+            <div class="form-group">
+              <label for="companySearchLocation" class="form-label">Location</label>
+              <input type="text" id="companySearchLocation" name="location" class="form-control" placeholder="e.g. Pune, Mumbai">
+            </div>
+            <div class="form-group">
+              <label for="companySearchStatus" class="form-label">Status</label>
+              <select id="companySearchStatus" name="status" class="form-control">
+                <option value="">All Statuses</option>
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="INACTIVE">INACTIVE</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button type="button" id="searchCompanyBtn" class="btn btn-primary">Search</button>
+            <button type="button" id="resetCompanyBtn" class="btn btn-outline">Reset</button>
+            <a href="#companyFormCard" class="btn btn-primary">Add Company</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Section: Company form or modal prototype -->
+      <div class="card" id="companyFormCard">
+        <div class="card-header">
+          <div>
+            <h3 id="compFormTitle" class="card-title">Company Master Registration / Update</h3>
+            <p class="card-subtitle">Maintain employer and corporate partner records</p>
+          </div>
+          <span class="badge badge-active">COMPANY MASTER</span>
+        </div>
+        <div class="card-body">
+          <form id="companyForm" onsubmit="return false;">
+            <input type="hidden" id="companyIdField">
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="compName" class="form-label">Company Name <span class="req">*</span></label>
+                <input type="text" id="compName" name="compName" class="form-control" placeholder="Enter company name" required>
+              </div>
+              <div class="form-group">
+                <label for="compIndustry" class="form-label">Industry <span class="req">*</span></label>
+                <input type="text" id="compIndustry" name="compIndustry" class="form-control" placeholder="e.g. IT Services, Fintech" required>
+              </div>
+              <div class="form-group">
+                <label for="compWebsite" class="form-label">Website</label>
+                <input type="url" id="compWebsite" name="compWebsite" class="form-control" placeholder="https://www.company.com">
+              </div>
+            </div>
+
+            <div class="form-grid-3" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="compLocation" class="form-label">Headquarters / Location <span class="req">*</span></label>
+                <input type="text" id="compLocation" name="compLocation" class="form-control" placeholder="e.g. Pune, Mumbai" required>
+              </div>
+              <div class="form-group">
+                <label for="compContactPerson" class="form-label">HR / Contact Person</label>
+                <input type="text" id="compContactPerson" name="compContactPerson" class="form-control" placeholder="Contact person name">
+              </div>
+              <div class="form-group">
+                <label for="compStatus" class="form-label">Status <span class="req">*</span></label>
+                <select id="compStatus" name="compStatus" class="form-control" required>
+                  <option value="ACTIVE" selected>ACTIVE</option>
+                  <option value="INACTIVE">INACTIVE</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-3" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="compContactEmail" class="form-label">HR / Contact Email</label>
+                <input type="email" id="compContactEmail" name="compContactEmail" class="form-control" placeholder="hr@company.com">
+              </div>
+              <div class="form-group">
+                <label for="compContactPhone" class="form-label">Contact Phone</label>
+                <input type="tel" id="compContactPhone" name="compContactPhone" class="form-control" placeholder="Contact phone number">
+              </div>
+              <div class="form-group">
+                <label for="compDescription" class="form-label">Company Description</label>
+                <input type="text" id="compDescription" name="compDescription" class="form-control" placeholder="Brief company summary">
+              </div>
+            </div>
+
+            <div class="filter-actions" style="margin-top: 20px;">
+              <button type="submit" id="saveCompanyBtn" class="btn btn-primary">Save Company</button>
+              <button type="button" id="cancelCompanyEditBtn" class="btn btn-outline" style="display:none;">Cancel Edit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Section: Company list table -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Company List</h3>
+            <p class="card-subtitle">Registered corporate recruitment partners in MySQL</p>
+          </div>
+          <span id="companyCountBadge" style="font-size:12px; color:#64748b;">Loading...</span>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Company ID</th>
+                <th>Company Name</th>
+                <th>Industry</th>
+                <th>Headquarters</th>
+                <th>Contact Person</th>
+                <th>Contact Email</th>
+                <th>Status</th>
+                <th>Open Jobs</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="companiesTbody">
+              <tr><td colspan="9" style="text-align:center;color:#64748b;">Loading companies...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    let currentEditingCompanyId = null;
+
+    async function loadCompanies() {
+      const tbody = document.getElementById('companiesTbody');
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#64748b;">Loading companies...</td></tr>';
+
+      const params = {
+        name: document.getElementById('companySearchName').value.trim(),
+        industry: document.getElementById('companySearchIndustry').value.trim(),
+        location: document.getElementById('companySearchLocation').value.trim(),
+        status: document.getElementById('companySearchStatus').value
+      };
+
+      try {
+        const list = await Api.getCompanies(params);
+        document.getElementById('companyCountBadge').textContent = `Showing ${list.length} Companies`;
+
+        if (!list || list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#64748b;padding:20px;">No companies found in database.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = list.map(c => `
+          <tr>
+            <td><strong>COM-${escapeHtml(c.company_id)}</strong></td>
+            <td>
+              <strong>${escapeHtml(c.company_name)}</strong>
+              ${c.website ? `<br><span style="font-size:11px;color:#64748b;"><a href="${escapeHtml(c.website)}" target="_blank">${escapeHtml(c.website.replace('https://','').replace('http://',''))}</a></span>` : ''}
+            </td>
+            <td>${escapeHtml(c.industry || '-')}</td>
+            <td>${escapeHtml(c.headquarters || '-')}</td>
+            <td>${escapeHtml(c.contact_person || '-')}</td>
+            <td>${escapeHtml(c.contact_email || '-')}</td>
+            <td><span class="badge ${c.status === 'ACTIVE' ? 'badge-active' : 'badge-inactive'}">${escapeHtml(c.status || 'ACTIVE')}</span></td>
+            <td><a href="jobs.html?companyId=${c.company_id}" class="btn btn-outline btn-sm">${c.total_jobs || 0} Open Jobs</a></td>
+            <td>
+              <div class="table-actions">
+                <button type="button" onclick="editCompany(${c.company_id})" class="btn btn-outline btn-sm">Edit</button>
+                <a href="jobs.html?companyId=${c.company_id}" class="btn btn-primary btn-sm">View Jobs</a>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        console.error('Error fetching companies:', err);
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:#ef4444;padding:20px;">Failed to load companies: ${escapeHtml(err.message)}</td></tr>`;
+        showNotification('Failed to load companies: ' + err.message, 'error');
+      }
+    }
+
+    async function editCompany(id) {
+      try {
+        const c = await Api.getCompanyById(id);
+        currentEditingCompanyId = id;
+        document.getElementById('companyIdField').value = id;
+        document.getElementById('compName').value = c.company_name || '';
+        document.getElementById('compIndustry').value = c.industry || '';
+        document.getElementById('compWebsite').value = c.website || '';
+        document.getElementById('compLocation').value = c.headquarters || '';
+        document.getElementById('compContactPerson').value = c.contact_person || '';
+        document.getElementById('compContactEmail').value = c.contact_email || '';
+        document.getElementById('compContactPhone').value = c.contact_phone || '';
+        document.getElementById('compDescription').value = c.company_description || '';
+        document.getElementById('compStatus').value = c.status || 'ACTIVE';
+
+        document.getElementById('compFormTitle').textContent = `Update Company: ${c.company_name}`;
+        document.getElementById('saveCompanyBtn').textContent = 'Update Company';
+        document.getElementById('cancelCompanyEditBtn').style.display = 'inline-block';
+
+        document.getElementById('companyFormCard').scrollIntoView({ behavior: 'smooth' });
+      } catch (err) {
+        console.error('Error loading company for edit:', err);
+        showNotification('Failed to load company details: ' + err.message, 'error');
+      }
+    }
+
+    function resetCompanyForm() {
+      currentEditingCompanyId = null;
+      document.getElementById('companyForm').reset();
+      document.getElementById('companyIdField').value = '';
+      document.getElementById('compFormTitle').textContent = 'Company Master Registration / Update';
+      document.getElementById('saveCompanyBtn').textContent = 'Save Company';
+      document.getElementById('cancelCompanyEditBtn').style.display = 'none';
+    }
+
+    document.getElementById('companyForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const compName = document.getElementById('compName').value.trim();
+      const compIndustry = document.getElementById('compIndustry').value.trim();
+      const compLocation = document.getElementById('compLocation').value.trim();
+
+      if (!compName) {
+        showNotification('Company name is required.', 'error');
+        return;
+      }
+
+      const payload = {
+        companyName: compName,
+        industry: compIndustry,
+        website: document.getElementById('compWebsite').value.trim(),
+        headquarters: compLocation,
+        contactPerson: document.getElementById('compContactPerson').value.trim(),
+        contactEmail: document.getElementById('compContactEmail').value.trim(),
+        contactPhone: document.getElementById('compContactPhone').value.trim(),
+        companyDescription: document.getElementById('compDescription').value.trim(),
+        status: document.getElementById('compStatus').value
+      };
+
+      const btn = document.getElementById('saveCompanyBtn');
+      btn.disabled = true;
+
+      try {
+        if (currentEditingCompanyId) {
+          await Api.updateCompany(currentEditingCompanyId, payload);
+          showNotification('Company updated successfully!', 'success');
+        } else {
+          await Api.createCompany(payload);
+          showNotification('Company registered successfully in database!', 'success');
+        }
+        resetCompanyForm();
+        loadCompanies();
+      } catch (err) {
+        console.error('Error saving company:', err);
+        showNotification('Failed to save company: ' + err.message, 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    document.getElementById('cancelCompanyEditBtn').addEventListener('click', resetCompanyForm);
+    document.getElementById('searchCompanyBtn').addEventListener('click', loadCompanies);
+    document.getElementById('resetCompanyBtn').addEventListener('click', () => {
+      document.getElementById('companyFilterForm').reset();
+      loadCompanies();
+    });
+
+    document.addEventListener('DOMContentLoaded', loadCompanies);
+  </script>
+</body>
+</html>

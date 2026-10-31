@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Add/Edit - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link active">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="candidates.html">Candidates</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Candidate Add/Edit</span>
+          </div>
+          <h2 class="page-title">Candidate Add/Edit</h2>
+        </div>
+        <div class="page-actions">
+          <a href="candidates.html" class="btn btn-outline">&larr; Back to Candidate List</a>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> Rahul Patil | BE | 2025 | 68% | Java | SQL | Pune
+      </div>
+
+      <!-- Prototype Validation Display Section -->
+      <div class="validation-notice">
+        <div>
+          <strong>Candidate Form Validation Rules:</strong>
+          <ul style="margin-left: 20px; margin-top: 4px;">
+            <li>Please enter candidate name.</li>
+            <li>Enter a valid email address.</li>
+            <li>Mobile number must contain 10 digits.</li>
+            <li>Percentage must be between 0 and 100.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Candidate Form Card -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Candidate Profile Entry / Update</h3>
+            <p class="card-subtitle">Personal, academic, technical skills, and placement preference details</p>
+          </div>
+          <span class="badge badge-active">PROFILE STATUS: ACTIVE</span>
+        </div>
+        <div class="card-body">
+          <form id="candidateForm" onsubmit="return false;">
+            
+            <!-- Section A: Personal Information -->
+            <h4 class="form-section-header">Personal Information</h4>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="fullName" class="form-label">Full Name <span class="req">*</span></label>
+                <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Candidate full name" required>
+                <span id="err-fullName" class="field-error-text" style="display:none;">&#9432; Validation: Please enter candidate name.</span>
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email <span class="req">*</span></label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Unique email address" required>
+                <span id="err-email" class="field-error-text" style="display:none;">&#9432; Validation: Enter a valid email address.</span>
+              </div>
+              <div class="form-group">
+                <label for="mobile" class="form-label">Mobile <span class="req">*</span></label>
+                <input type="tel" id="mobile" name="mobile" class="form-control" pattern="[0-9]{10}" placeholder="10-digit mobile" required>
+                <span id="err-mobile" class="field-error-text" style="display:none;">&#9432; Validation: Mobile number must contain 10 digits.</span>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input type="date" id="dob" name="dob" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Gender</label>
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="gender" value="Male" checked> Male</label>
+                  <label class="radio-label"><input type="radio" name="gender" value="Female"> Female</label>
+                  <label class="radio-label"><input type="radio" name="gender" value="Other"> Other</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section B: Academic Information -->
+            <h4 class="form-section-header">Academic Information</h4>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="qualification" class="form-label">Qualification <span class="req">*</span></label>
+                <select id="qualification" name="qualification" class="form-control" required>
+                  <option value="">-- Select Highest Qualification --</option>
+                  <option value="B.Tech">B.Tech</option>
+                  <option value="B.E.">B.E.</option>
+                  <option value="BE">BE</option>
+                  <option value="BTech">BTech</option>
+                  <option value="MCA">MCA</option>
+                  <option value="BSc">BSc</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="college" class="form-label">College <span class="req">*</span></label>
+                <input type="text" id="college" name="college" class="form-control" placeholder="College name" required>
+              </div>
+              <div class="form-group">
+                <label for="university" class="form-label">University</label>
+                <input type="text" id="university" name="university" class="form-control" placeholder="University name">
+              </div>
+            </div>
+
+            <div class="form-grid-3" style="margin-top: 14px;">
+              <div class="form-group">
+                <label for="passingYear" class="form-label">Passing Year <span class="req">*</span></label>
+                <select id="passingYear" name="passingYear" class="form-control" required>
+                  <option value="">-- Year of Passing --</option>
+                  <option value="2027">2027</option>
+                  <option value="2026">2026</option>
+                  <option value="2025">2025</option>
+                  <option value="2024">2024</option>
+                  <option value="2023">2023</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="percentage" class="form-label">Percentage / CGPA <span class="req">*</span></label>
+                <input type="number" id="percentage" name="percentage" class="form-control" min="0" max="100" step="0.01" placeholder="Academic percentage" required>
+                <span id="err-percentage" class="field-error-text" style="display:none;">&#9432; Validation: Percentage must be between 0 and 100.</span>
+              </div>
+              <div class="form-group">
+                <label for="backlogs" class="form-label">Backlog Count <span class="req">*</span></label>
+                <input type="number" id="backlogs" name="backlogs" class="form-control" value="0" min="0" placeholder="0 or more" required>
+              </div>
+            </div>
+
+            <!-- Section C: Skills -->
+            <h4 class="form-section-header">Skills</h4>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="primaryTech" class="form-label">Primary Technology <span class="req">*</span></label>
+                <select id="primaryTech" name="primaryTech" class="form-control" required>
+                  <option value="">-- Select Primary Technology --</option>
+                  <option value="Java">Java</option>
+                  <option value="Python">Python</option>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Testing">Testing</option>
+                  <option value="Data Analytics">Data Analytics</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="secondarySkills" class="form-label">Secondary Skills</label>
+                <input type="text" id="secondarySkills" name="secondarySkills" class="form-control" placeholder="Additional skills e.g. SQL, Spring Boot, Git">
+              </div>
+              <div class="form-group">
+                <label for="skillLevel" class="form-label">Skill Level</label>
+                <select id="skillLevel" name="skillLevel" class="form-control">
+                  <option value="Basic">Basic</option>
+                  <option value="Intermediate" selected>Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Section D: Placement Preferences -->
+            <h4 class="form-section-header">Placement Preferences</h4>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="currentLocation" class="form-label">Current Location</label>
+                <input type="text" id="currentLocation" name="currentLocation" class="form-control" placeholder="Current city">
+              </div>
+              <div class="form-group">
+                <label for="preferredLocation" class="form-label">Preferred Location</label>
+                <input type="text" id="preferredLocation" name="preferredLocation" class="form-control" placeholder="Preferred job location">
+              </div>
+              <div class="form-group">
+                <label for="profileStatus" class="form-label">Profile Status <span class="req">*</span></label>
+                <select id="profileStatus" name="profileStatus" class="form-control" required>
+                  <option value="ACTIVE" selected>ACTIVE</option>
+                  <option value="INACTIVE">INACTIVE</option>
+                  <option value="ON_HOLD">ON_HOLD</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Form Action Buttons -->
+            <div class="filter-actions" style="margin-top: 24px;">
+              <button type="submit" id="saveCandidateBtn" class="btn btn-primary">Save Candidate</button>
+              <a href="candidates.html" class="btn btn-outline">Cancel</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const candidateId = urlParams.get('id');
+
+    async function initForm() {
+      if (candidateId) {
+        document.querySelector('.card-title').textContent = 'Candidate Profile Update (ID: ' + candidateId + ')';
+        document.getElementById('saveCandidateBtn').textContent = 'Update Candidate';
+
+        try {
+          const c = await Api.getCandidateById(candidateId);
+          document.getElementById('fullName').value = c.full_name || '';
+          document.getElementById('email').value = c.email || '';
+          document.getElementById('mobile').value = c.mobile || '';
+          if (c.date_of_birth) document.getElementById('dob').value = c.date_of_birth;
+          if (c.gender) {
+            const rad = document.querySelector(`input[name="gender"][value="${c.gender}"]`);
+            if (rad) rad.checked = true;
+          }
+          document.getElementById('qualification').value = c.qualification || '';
+          document.getElementById('college').value = c.college || '';
+          document.getElementById('university').value = c.university || '';
+          document.getElementById('passingYear').value = c.passing_year || '';
+          document.getElementById('percentage').value = c.percentage || '';
+          document.getElementById('backlogs').value = c.backlog_count != null ? c.backlog_count : 0;
+          document.getElementById('primaryTech').value = c.primary_technology || '';
+          document.getElementById('currentLocation').value = c.current_location || '';
+          document.getElementById('preferredLocation').value = c.preferred_location || '';
+          document.getElementById('profileStatus').value = c.profile_status || 'ACTIVE';
+
+          if (c.skills && c.skills.length > 0) {
+            document.getElementById('secondarySkills').value = c.skills.map(s => s.skill_name).join(', ');
+          }
+        } catch (err) {
+          console.error('Error preloading candidate:', err);
+          showNotification('Could not load candidate details: ' + err.message, 'error');
+        }
+      }
+    }
+
+    document.getElementById('candidateForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const mobile = document.getElementById('mobile').value.trim();
+      const qualification = document.getElementById('qualification').value;
+      const passingYear = document.getElementById('passingYear').value;
+      const percentage = document.getElementById('percentage').value;
+
+      if (!fullName) {
+        document.getElementById('err-fullName').style.display = 'block';
+        return;
+      }
+      if (!email) {
+        document.getElementById('err-email').style.display = 'block';
+        return;
+      }
+      if (!mobile || mobile.length !== 10) {
+        document.getElementById('err-mobile').style.display = 'block';
+        return;
+      }
+
+      const gender = document.querySelector('input[name="gender"]:checked')?.value || 'Male';
+      const payload = {
+        fullName,
+        email,
+        mobile,
+        dateOfBirth: document.getElementById('dob').value || null,
+        gender,
+        qualification,
+        college: document.getElementById('college').value.trim(),
+        university: document.getElementById('university').value.trim(),
+        passingYear: parseInt(passingYear),
+        percentage: percentage ? parseFloat(percentage) : null,
+        backlogCount: parseInt(document.getElementById('backlogs').value || 0),
+        primaryTechnology: document.getElementById('primaryTech').value,
+        currentLocation: document.getElementById('currentLocation').value.trim(),
+        preferredLocation: document.getElementById('preferredLocation').value.trim(),
+        profileStatus: document.getElementById('profileStatus').value
+      };
+
+      const btn = document.getElementById('saveCandidateBtn');
+      btn.disabled = true;
+      btn.textContent = 'Saving to database...';
+
+      try {
+        if (candidateId) {
+          await Api.updateCandidate(candidateId, payload);
+          showNotification('Candidate updated successfully in MySQL!', 'success');
+        } else {
+          await Api.createCandidate(payload);
+          showNotification('Candidate registered successfully in MySQL!', 'success');
+        }
+
+        setTimeout(() => {
+          window.location.href = 'candidates.html';
+        }, 1200);
+      } catch (err) {
+        console.error('Error saving candidate:', err);
+        showNotification('Save error: ' + err.message, 'error');
+        btn.disabled = false;
+        btn.textContent = candidateId ? 'Update Candidate' : 'Save Candidate';
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', initForm);
+  </script>
+</body>
+</html>

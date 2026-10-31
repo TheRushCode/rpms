@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate List - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link active">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Candidates</span>
+          </div>
+          <h2 class="page-title">Candidate List</h2>
+        </div>
+        <div class="page-actions">
+          <a href="candidate-form.html" class="btn btn-primary">+ Add Candidate</a>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> CAN1001 | Rahul Patil | Java | BE | 2025 | ACTIVE
+      </div>
+
+      <!-- Filter Panel -->
+      <div class="filter-panel">
+        <h3 class="filter-title">Filter &amp; Search Candidates</h3>
+        <form id="candidate-filter-form" onsubmit="return false;">
+          <div class="filter-grid">
+            <div class="form-group">
+              <label for="filterCandidateId" class="form-label">Candidate ID</label>
+              <input type="text" id="filterCandidateId" name="candidateId" class="form-control" placeholder="e.g. CAN1001 or KA2026001">
+            </div>
+            <div class="form-group">
+              <label for="filterCandidateName" class="form-label">Candidate Name</label>
+              <input type="text" id="filterCandidateName" name="candidateName" class="form-control" placeholder="Search by name">
+            </div>
+            <div class="form-group">
+              <label for="filterMobile" class="form-label">Mobile</label>
+              <input type="text" id="filterMobile" name="mobile" class="form-control" placeholder="10-digit number">
+            </div>
+            <div class="form-group">
+              <label for="filterEmail" class="form-label">Email</label>
+              <input type="text" id="filterEmail" name="email" class="form-control" placeholder="candidate@email.com">
+            </div>
+            <div class="form-group">
+              <label for="filterTechnology" class="form-label">Technology</label>
+              <select id="filterTechnology" name="technology" class="form-control">
+                <option value="">All Technologies</option>
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Testing">Testing</option>
+                <option value="Data Analytics">Data Analytics</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="filterPassingYear" class="form-label">Passing Year</label>
+              <select id="filterPassingYear" name="passingYear" class="form-control">
+                <option value="">All Years</option>
+                <option value="2027">2027</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="filterQualification" class="form-label">Qualification</label>
+              <select id="filterQualification" name="qualification" class="form-control">
+                <option value="">All Qualifications</option>
+                <option value="B.Tech">B.Tech</option>
+                <option value="B.E.">B.E.</option>
+                <option value="BE">BE</option>
+                <option value="BTech">BTech</option>
+                <option value="MCA">MCA</option>
+                <option value="BSc">BSc</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="filterPlacementStatus" class="form-label">Placement Status</label>
+              <select id="filterPlacementStatus" name="placementStatus" class="form-control">
+                <option value="">All Statuses</option>
+                <option value="NOT_PLACED">NOT_PLACED</option>
+                <option value="PLACED">PLACED</option>
+                <option value="ACTIVE">ACTIVE</option>
+                <option value="IN_PROCESS">IN_PROCESS</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button type="button" id="searchBtn" class="btn btn-primary">Search</button>
+            <button type="button" id="resetBtn" class="btn btn-outline">Reset</button>
+            <a href="candidate-form.html" class="btn btn-primary">Add Candidate</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Candidate Results Table -->
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Candidate ID</th>
+              <th>Candidate Name</th>
+              <th>Mobile</th>
+              <th>Email</th>
+              <th>Technology</th>
+              <th>Qualification</th>
+              <th>Passing Year</th>
+              <th>Placement Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="candidates-tbody">
+            <tr><td colspan="9" style="text-align:center;color:#64748b;">Loading candidate directory from database...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination Controls -->
+      <div class="pagination-wrapper">
+        <span id="candidates-count-info">Showing candidate entries</span>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    async function loadCandidates() {
+      const tbody = document.getElementById('candidates-tbody');
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#64748b;">Loading candidates...</td></tr>';
+
+      const params = {
+        candidateId: document.getElementById('filterCandidateId').value.trim(),
+        name: document.getElementById('filterCandidateName').value.trim(),
+        mobile: document.getElementById('filterMobile').value.trim(),
+        email: document.getElementById('filterEmail').value.trim(),
+        technology: document.getElementById('filterTechnology').value,
+        passingYear: document.getElementById('filterPassingYear').value,
+        qualification: document.getElementById('filterQualification').value,
+        placementStatus: document.getElementById('filterPlacementStatus').value
+      };
+
+      try {
+        const list = await Api.getCandidates(params);
+        document.getElementById('candidates-count-info').textContent = `Showing ${list.length} candidate entries`;
+
+        if (!list || list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#64748b;padding:20px;">No matching candidates found in database.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = list.map(c => {
+          const status = c.placement_status || 'NOT_PLACED';
+          const badgeClass = status.toUpperCase() === 'PLACED' ? 'badge-placed' : 'badge-active';
+          return `
+            <tr>
+              <td><strong>${escapeHtml(c.candidate_code || c.candidate_id)}</strong></td>
+              <td>${escapeHtml(c.full_name)}</td>
+              <td>${escapeHtml(c.mobile || '-')}</td>
+              <td>${escapeHtml(c.email || '-')}</td>
+              <td>${escapeHtml(c.primary_technology || '-')}</td>
+              <td>${escapeHtml(c.qualification || '-')}</td>
+              <td>${escapeHtml(c.passing_year || '-')}</td>
+              <td><span class="badge ${badgeClass}">${escapeHtml(status)}</span></td>
+              <td>
+                <div class="table-actions">
+                  <a href="candidate-details.html?id=${c.candidate_id}" class="btn btn-outline btn-sm">View</a>
+                  <a href="candidate-form.html?id=${c.candidate_id}" class="btn btn-outline btn-sm">Edit</a>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error('Error fetching candidates:', err);
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:#ef4444;padding:20px;">Failed to load candidate records: ${escapeHtml(err.message)}</td></tr>`;
+        showNotification('Failed to load candidate records', 'error');
+      }
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', loadCandidates);
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      document.getElementById('candidate-filter-form').reset();
+      loadCandidates();
+    });
+
+    document.addEventListener('DOMContentLoaded', loadCandidates);
+  </script>
+</body>
+</html>

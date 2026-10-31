@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link active">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <span>Home</span>
+            <span class="breadcrumb-separator">/</span>
+            <span>Dashboard</span>
+          </div>
+          <h2 class="page-title">Dashboard</h2>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> Total Candidates 2,450 | Open Jobs 28 | Interviews Today 14 | Placed 685
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions-bar">
+        <span class="quick-actions-title">Quick Actions:</span>
+        <a href="candidates.html" class="btn btn-primary btn-sm">View Candidates</a>
+        <a href="jobs.html" class="btn btn-outline btn-sm">View Open Jobs</a>
+        <a href="interviews.html" class="btn btn-outline btn-sm">View Interviews</a>
+        <a href="reports.html" class="btn btn-outline btn-sm">View Reports</a>
+      </div>
+
+      <!-- Summary Cards (8 metrics required by PDF) -->
+      <div class="stats-grid-8">
+        <div class="stat-card">
+          <span class="stat-title">Total Candidates</span>
+          <span id="kpi-total-candidates" class="stat-value">...</span>
+          <span class="stat-sub">Enrolled student base</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Active Candidates</span>
+          <span id="kpi-active-candidates" class="stat-value">...</span>
+          <span class="stat-sub">Ready for placement</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Companies</span>
+          <span id="kpi-total-companies" class="stat-value">...</span>
+          <span class="stat-sub">Registered employers</span>
+        </div>
+        <div class="stat-card stat-success">
+          <span class="stat-title">Open Jobs</span>
+          <span id="kpi-open-jobs" class="stat-value">...</span>
+          <span class="stat-sub">Active requirements</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Applications</span>
+          <span id="kpi-total-applications" class="stat-value">...</span>
+          <span class="stat-sub">Total submissions</span>
+        </div>
+        <div class="stat-card stat-warning">
+          <span class="stat-title">Interviews</span>
+          <span id="kpi-interviews-today" class="stat-value">...</span>
+          <span class="stat-sub">Interviews Today</span>
+        </div>
+        <div class="stat-card stat-purple">
+          <span class="stat-title">Selected</span>
+          <span id="kpi-selected" class="stat-value">...</span>
+          <span class="stat-sub">Cleared assessments</span>
+        </div>
+        <div class="stat-card stat-success">
+          <span class="stat-title">Placed</span>
+          <span id="kpi-placed" class="stat-value">...</span>
+          <span class="stat-sub">Successfully onboarded</span>
+        </div>
+      </div>
+
+      <!-- Required Section: Recruitment Funnel -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Recruitment Funnel</h3>
+            <p class="card-subtitle">End-to-end recruitment pipeline conversion</p>
+          </div>
+          <a href="reports.html" class="btn btn-outline btn-sm">View Funnel Report</a>
+        </div>
+        <div class="card-body">
+          <div class="funnel-container">
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Total Candidates</span>
+              <div class="funnel-track">
+                <div class="funnel-fill" style="width: 100%;">100%</div>
+              </div>
+              <span id="funnel-cand-count" class="funnel-count">0</span>
+            </div>
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Applications</span>
+              <div class="funnel-track">
+                <div id="funnel-apps-fill" class="funnel-fill" style="width: 0%;">0%</div>
+              </div>
+              <span id="funnel-apps-count" class="funnel-count">0</span>
+            </div>
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Shortlisted</span>
+              <div class="funnel-track">
+                <div id="funnel-short-fill" class="funnel-fill" style="width: 0%;">0%</div>
+              </div>
+              <span id="funnel-short-count" class="funnel-count">0</span>
+            </div>
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Interviews</span>
+              <div class="funnel-track">
+                <div id="funnel-int-fill" class="funnel-fill" style="width: 0%;">0%</div>
+              </div>
+              <span id="funnel-int-count" class="funnel-count">0</span>
+            </div>
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Selected</span>
+              <div class="funnel-track">
+                <div id="funnel-sel-fill" class="funnel-fill" style="width: 0%;">0%</div>
+              </div>
+              <span id="funnel-sel-count" class="funnel-count">0</span>
+            </div>
+            <div class="funnel-bar-item">
+              <span class="funnel-label">Placed</span>
+              <div class="funnel-track">
+                <div id="funnel-placed-fill" class="funnel-fill" style="width: 0%;">0%</div>
+              </div>
+              <span id="funnel-placed-count" class="funnel-count">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Required Section: Upcoming Interviews & Recent Job Openings -->
+      <div class="reports-grid">
+        <!-- Upcoming Interviews -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Upcoming Interviews</h3>
+              <p class="card-subtitle">Scheduled candidate assessments</p>
+            </div>
+            <a href="interviews.html" class="btn btn-outline btn-sm">View Interviews</a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Candidate</th>
+                  <th>Company</th>
+                  <th>Round</th>
+                  <th>Time / Mode</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-upcoming-interviews">
+                <tr><td colspan="5" style="text-align:center;color:#64748b;">Loading interviews...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Job Openings -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Recent Job Openings</h3>
+              <p class="card-subtitle">Active employer mandates and criteria</p>
+            </div>
+            <a href="jobs.html" class="btn btn-outline btn-sm">View Open Jobs</a>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Job Code</th>
+                  <th>Company &amp; Role</th>
+                  <th>Openings</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-recent-jobs">
+                <tr><td colspan="5" style="text-align:center;color:#64748b;">Loading jobs...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Required Section: Recent Placements -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Recent Placements</h3>
+            <p class="card-subtitle">Candidates successfully placed across partner employers</p>
+          </div>
+          <a href="placement-process.html" class="btn btn-outline btn-sm">Placement Process</a>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Candidate ID</th>
+                <th>Candidate Name</th>
+                <th>Company</th>
+                <th>Designation</th>
+                <th>Package</th>
+                <th>Joining Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-recent-placements">
+              <tr><td colspan="7" style="text-align:center;color:#64748b;">Loading placements...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    async function loadDashboard() {
+      try {
+        const stats = await Api.getDashboardStats();
+        document.getElementById('kpi-total-candidates').textContent = Number(stats.totalCandidates || 0).toLocaleString();
+        document.getElementById('kpi-active-candidates').textContent = Number(stats.activeCandidates || 0).toLocaleString();
+        document.getElementById('kpi-total-companies').textContent = Number(stats.totalCompanies || 0).toLocaleString();
+        document.getElementById('kpi-open-jobs').textContent = Number(stats.openJobs || 0).toLocaleString();
+        document.getElementById('kpi-total-applications').textContent = Number(stats.totalApplications || 0).toLocaleString();
+        document.getElementById('kpi-interviews-today').textContent = Number(stats.interviewsToday || 0).toLocaleString();
+        document.getElementById('kpi-selected').textContent = Number(stats.selectedCandidates || 0).toLocaleString();
+        document.getElementById('kpi-placed').textContent = Number(stats.placedCandidates || 0).toLocaleString();
+
+        // Render upcoming interviews
+        const intTbody = document.getElementById('tbody-upcoming-interviews');
+        if (stats.upcomingInterviews && stats.upcomingInterviews.length > 0) {
+          intTbody.innerHTML = stats.upcomingInterviews.map(i => `
+            <tr>
+              <td><strong>${escapeHtml(i.candidate_name)}</strong></td>
+              <td>${escapeHtml(i.company_name)}</td>
+              <td>${escapeHtml(i.round_name)}</td>
+              <td>${escapeHtml(i.scheduled_at ? new Date(i.scheduled_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'TBD')}<br><span style="font-size:11px;color:#64748b;">${escapeHtml(i.interview_mode)}</span></td>
+              <td><span class="badge badge-scheduled">${escapeHtml(i.round_status)}</span></td>
+            </tr>
+          `).join('');
+        } else {
+          intTbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#64748b;">No scheduled interviews found.</td></tr>';
+        }
+
+        // Render recent jobs
+        const jobsTbody = document.getElementById('tbody-recent-jobs');
+        if (stats.recentJobs && stats.recentJobs.length > 0) {
+          jobsTbody.innerHTML = stats.recentJobs.map(j => `
+            <tr>
+              <td><strong>JOB-${escapeHtml(j.job_id)}</strong></td>
+              <td>${escapeHtml(j.company_name)}<br><span style="font-size:11px;color:#64748b;">${escapeHtml(j.job_title)}</span></td>
+              <td>${escapeHtml(j.openings)}</td>
+              <td>${escapeHtml(j.work_location || 'N/A')}</td>
+              <td><span class="badge badge-open">${escapeHtml(j.job_status)}</span></td>
+            </tr>
+          `).join('');
+        } else {
+          jobsTbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#64748b;">No job openings recorded.</td></tr>';
+        }
+
+        // Render recent placements
+        const plTbody = document.getElementById('tbody-recent-placements');
+        if (stats.recentPlacements && stats.recentPlacements.length > 0) {
+          plTbody.innerHTML = stats.recentPlacements.map(p => `
+            <tr>
+              <td>${escapeHtml(p.candidate_code || p.placement_id)}</td>
+              <td><strong>${escapeHtml(p.candidate_name)}</strong></td>
+              <td>${escapeHtml(p.company_name)}</td>
+              <td>${escapeHtml(p.job_title)}</td>
+              <td>₹${Number(p.salary || 0).toLocaleString()}</td>
+              <td>${escapeHtml(p.joining_date || 'TBD')}</td>
+              <td><span class="badge badge-placed">${escapeHtml(p.placement_status)}</span></td>
+            </tr>
+          `).join('');
+        } else {
+          plTbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#64748b;">No recent placements recorded.</td></tr>';
+        }
+
+        // Load funnel
+        const funnel = await Api.getDashboardFunnel();
+        document.getElementById('funnel-cand-count').textContent = Number(funnel.totalCandidates || 0).toLocaleString();
+        document.getElementById('funnel-apps-count').textContent = Number(funnel.applications || 0).toLocaleString();
+        document.getElementById('funnel-short-count').textContent = Number(funnel.shortlisted || 0).toLocaleString();
+        document.getElementById('funnel-int-count').textContent = Number(funnel.interviews || 0).toLocaleString();
+        document.getElementById('funnel-sel-count').textContent = Number(funnel.selected || 0).toLocaleString();
+        document.getElementById('funnel-placed-count').textContent = Number(funnel.placed || 0).toLocaleString();
+
+        document.getElementById('funnel-apps-fill').style.width = `${funnel.applicationsPct || 0}%`;
+        document.getElementById('funnel-apps-fill').textContent = `${funnel.applicationsPct || 0}%`;
+        document.getElementById('funnel-short-fill').style.width = `${funnel.shortlistedPct || 0}%`;
+        document.getElementById('funnel-short-fill').textContent = `${funnel.shortlistedPct || 0}%`;
+        document.getElementById('funnel-int-fill').style.width = `${funnel.interviewsPct || 0}%`;
+        document.getElementById('funnel-int-fill').textContent = `${funnel.interviewsPct || 0}%`;
+        document.getElementById('funnel-sel-fill').style.width = `${funnel.selectedPct || 0}%`;
+        document.getElementById('funnel-sel-fill').textContent = `${funnel.selectedPct || 0}%`;
+        document.getElementById('funnel-placed-fill').style.width = `${funnel.placedPct || 0}%`;
+        document.getElementById('funnel-placed-fill').textContent = `${funnel.placedPct || 0}%`;
+
+      } catch (err) {
+        console.error('Error loading dashboard data:', err);
+        showNotification('Unable to connect to backend: ' + err.message, 'error');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadDashboard);
+  </script>
+</body>
+</html>

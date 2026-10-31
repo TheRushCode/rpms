@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidate Details - Recruitment &amp; Placement Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <img src="images/logo.png" alt="Logo" class="header-logo">
+      <div class="header-title-wrap">
+        <span class="header-system-title">Recruitment &amp; Placement Management System</span>
+        <span class="header-system-subtitle">Campus &amp; Corporate Placement Cell</span>
+      </div>
+    </div>
+    <div class="header-user">
+      <div class="user-profile-badge">
+        <div class="user-avatar-circle">RS</div>
+        <div class="user-info">
+          <span class="user-name">Rahul Sharma</span>
+          <span class="user-role">Recruiter</span>
+        </div>
+      </div>
+      <a href="login.html" class="header-logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div class="sidebar-nav">
+        <div class="nav-section-title">Main Navigation</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="dashboard.html" class="nav-link">
+              <span class="nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="candidates.html" class="nav-link active">
+              <span class="nav-icon">👥</span>
+              <span>Candidates</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="companies.html" class="nav-link">
+              <span class="nav-icon">🏢</span>
+              <span>Companies</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="jobs.html" class="nav-link">
+              <span class="nav-icon">💼</span>
+              <span>Jobs</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="applications.html" class="nav-link">
+              <span class="nav-icon">📝</span>
+              <span>Applications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="interviews.html" class="nav-link">
+              <span class="nav-icon">📅</span>
+              <span>Interviews</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="placement-process.html" class="nav-link">
+              <span class="nav-icon">🎯</span>
+              <span>Placement Process</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="reports.html" class="nav-link">
+              <span class="nav-icon">📈</span>
+              <span>Reports</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        Kiran Academy &copy; 2026<br>Recruitment System
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="page-header-row">
+        <div class="page-title-group">
+          <div class="breadcrumb-bar">
+            <a href="dashboard.html">Home</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="candidates.html">Candidates</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Candidate Details</span>
+          </div>
+          <h2 class="page-title">Candidate Details</h2>
+        </div>
+        <div class="page-actions">
+          <a href="candidate-form.html" class="btn btn-primary">Edit Candidate</a>
+          <a href="candidates.html" class="btn btn-outline">&larr; Back to Candidate List</a>
+        </div>
+      </div>
+
+      <!-- Sample Display Data Notice -->
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:6px; padding:10px 14px; margin-bottom:16px; font-size:13px; color:#1e40af;">
+        <strong>Sample Display Data:</strong> Candidate CAN1001 | Rahul Patil | ACTIVE | Java | 3 Applications | 1 Offer
+      </div>
+
+      <!-- Section 1: Candidate summary header with status badge -->
+      <div class="profile-summary-header">
+        <div class="profile-main-meta">
+          <div id="d-avatar" class="profile-avatar-large">CA</div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <h3 id="d-full-name" class="profile-name">Loading...</h3>
+              <span id="d-status-badge" class="badge badge-active">ACTIVE</span>
+            </div>
+            <div id="d-id-tag" class="profile-id-tag">Candidate ID: ...</div>
+            <div class="profile-meta-pills">
+              <span class="meta-pill"><strong>Technology:</strong> <span id="d-pill-tech">-</span></span>
+              <span class="meta-pill"><strong id="d-pill-apps">0 Applications</strong></span>
+              <span class="meta-pill"><strong id="d-pill-status">NOT_PLACED</strong></span>
+              <span class="meta-pill"><strong>Qualification:</strong> <span id="d-pill-qual">-</span></span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a id="btn-edit-cand" href="candidate-form.html" class="btn btn-outline btn-sm">Edit Candidate</a>
+        </div>
+      </div>
+
+      <!-- Section 2: Personal Information & Section 3: Academic Details -->
+      <div class="reports-grid">
+        <!-- Personal Information -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Personal Information</h3>
+          </div>
+          <div class="card-body">
+            <div class="details-grid" style="grid-template-columns: repeat(2, 1fr);">
+              <div class="detail-item">
+                <span class="detail-label">Full Name</span>
+                <span id="d-personal-name" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Email Address</span>
+                <span id="d-personal-email" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Mobile Number</span>
+                <span id="d-personal-mobile" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Date of Birth</span>
+                <span id="d-personal-dob" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Gender</span>
+                <span id="d-personal-gender" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Current City</span>
+                <span id="d-personal-city" class="detail-value">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Details -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Academic Details</h3>
+          </div>
+          <div class="card-body">
+            <div class="details-grid" style="grid-template-columns: repeat(2, 1fr);">
+              <div class="detail-item">
+                <span class="detail-label">Highest Qualification</span>
+                <span id="d-acad-qual" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Passing Year</span>
+                <span id="d-acad-year" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">College</span>
+                <span id="d-acad-college" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">University</span>
+                <span id="d-acad-univ" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Percentage / CGPA</span>
+                <span id="d-acad-pct" class="detail-value">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Backlog Count</span>
+                <span id="d-acad-backlogs" class="detail-value">0 (No Backlogs)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Skills -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Skills</h3>
+        </div>
+        <div class="card-body">
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Primary Technology</span>
+              <span id="d-skills-primary" class="detail-value">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Skill Level</span>
+              <span id="d-skills-level" class="detail-value">Intermediate</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Secondary / Added Skills</span>
+              <span id="d-skills-secondary" class="detail-value">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Current Location</span>
+              <span id="d-skills-curloc" class="detail-value">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Preferred Location</span>
+              <span id="d-skills-prefloc" class="detail-value">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Profile Status</span>
+              <span id="d-skills-status" class="detail-value">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5: Applications History -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">Applications History</h3>
+            <p class="card-subtitle">Job opening applications submitted by candidate</p>
+          </div>
+          <a href="applications.html" class="btn btn-outline btn-sm">All Applications</a>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>App ID</th>
+                <th>Company</th>
+                <th>Job Code &amp; Title</th>
+                <th>Applied Date</th>
+                <th>Application Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="d-apps-tbody">
+              <tr><td colspan="6" style="text-align:center;color:#64748b;">Loading candidate applications...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    async function loadCandidateDetails() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const candId = urlParams.get('id') || 1;
+
+      try {
+        const c = await Api.getCandidateById(candId);
+        
+        // Header
+        const initials = (c.full_name || 'CA').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+        document.getElementById('d-avatar').textContent = initials;
+        document.getElementById('d-full-name').textContent = c.full_name || '-';
+        document.getElementById('d-id-tag').textContent = `Candidate ID: ${c.candidate_code || c.candidate_id} • Enrolled Student Profile`;
+        
+        const statusBadge = document.getElementById('d-status-badge');
+        statusBadge.textContent = c.placement_status || 'NOT_PLACED';
+        statusBadge.className = 'badge ' + (c.placement_status === 'PLACED' ? 'badge-placed' : 'badge-active');
+
+        document.getElementById('d-pill-tech').textContent = c.primary_technology || '-';
+        document.getElementById('d-pill-status').textContent = c.placement_status || 'NOT_PLACED';
+        document.getElementById('d-pill-qual').textContent = `${c.qualification || '-'} (${c.passing_year || '-'})`;
+
+        document.getElementById('btn-edit-cand').href = `candidate-form.html?id=${c.candidate_id}`;
+
+        // Personal Information
+        document.getElementById('d-personal-name').textContent = c.full_name || '-';
+        document.getElementById('d-personal-email').textContent = c.email || '-';
+        document.getElementById('d-personal-mobile').textContent = c.mobile || '-';
+        document.getElementById('d-personal-dob').textContent = c.date_of_birth || 'Not specified';
+        document.getElementById('d-personal-gender').textContent = c.gender || 'Not specified';
+        document.getElementById('d-personal-city').textContent = c.current_location || '-';
+
+        // Academic Details
+        document.getElementById('d-acad-qual').textContent = c.qualification || '-';
+        document.getElementById('d-acad-year').textContent = c.passing_year || '-';
+        document.getElementById('d-acad-college').textContent = c.college || '-';
+        document.getElementById('d-acad-univ').textContent = c.university || '-';
+        document.getElementById('d-acad-pct').textContent = `${c.percentage || '-'}% / ${c.cgpa || '-'} CGPA`;
+        document.getElementById('d-acad-backlogs').textContent = `${c.backlog_count || 0} Backlog(s)`;
+
+        // Skills
+        document.getElementById('d-skills-primary').textContent = c.primary_technology || '-';
+        document.getElementById('d-skills-curloc').textContent = c.current_location || '-';
+        document.getElementById('d-skills-prefloc').textContent = c.preferred_location || '-';
+        document.getElementById('d-skills-status').textContent = c.profile_status || 'ACTIVE';
+
+        if (c.skills && c.skills.length > 0) {
+          const skillNames = c.skills.map(s => s.skill_name).join(', ');
+          document.getElementById('d-skills-secondary').textContent = skillNames;
+        } else {
+          document.getElementById('d-skills-secondary').textContent = 'None added';
+        }
+
+        // Applications
+        const apps = await Api.getCandidateApplications(candId);
+        document.getElementById('d-pill-apps').textContent = `${apps.length} Application(s)`;
+
+        const appsTbody = document.getElementById('d-apps-tbody');
+        if (apps.length === 0) {
+          appsTbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#64748b;padding:20px;">No applications submitted yet.</td></tr>';
+        } else {
+          appsTbody.innerHTML = apps.map(a => `
+            <tr>
+              <td><strong>APP${escapeHtml(a.application_id)}</strong></td>
+              <td>${escapeHtml(a.company_name)}</td>
+              <td>JOB-${escapeHtml(a.job_id)} (${escapeHtml(a.job_title)})</td>
+              <td>${escapeHtml(a.application_date ? a.application_date.substring(0, 10) : '-')}</td>
+              <td><span class="badge badge-active">${escapeHtml(a.application_status)}</span></td>
+              <td><a href="applications.html" class="btn btn-outline btn-sm">View Pipeline</a></td>
+            </tr>
+          `).join('');
+        }
+
+      } catch (err) {
+        console.error('Error fetching candidate details:', err);
+        showNotification('Failed to load candidate profile: ' + err.message, 'error');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCandidateDetails);
+  </script>
+</body>
+</html>
