@@ -22,9 +22,9 @@ services:
       - key: DB_HOST
         sync: false
       - key: DB_PORT
-        value: "3306"
+        value: "22608"
       - key: DB_NAME
-        value: kiran_academy_rpms
+        value: kiran_academy_rpms_migration
       - key: DB_USERNAME
         sync: false
       - key: DB_PASSWORD
