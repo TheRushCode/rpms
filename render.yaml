@@ -34,12 +34,12 @@ services:
 
   # ----------------------------------------------------------------------------
   # Frontend Static Site (HTML5 / CSS3 / Vanilla JS)
+  # Note: Static sites are hosted on Render's CDN and do not use a compute plan.
   # ----------------------------------------------------------------------------
   - type: web
     name: rpms-frontend
     runtime: static
     staticPublishPath: recruitment-placement-ui
-    plan: free
     routes:
       - type: redirect
         source: /
