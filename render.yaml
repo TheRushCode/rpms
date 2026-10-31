@@ -1,11 +1,7 @@
-# ==============================================================================
-# Render Blueprint Specification for Kiran Academy RPMS
-# ==============================================================================
-
 version: "1"
 
 services:
-  # Backend Web Service (Spring Boot)
+  # Spring Boot Backend
   - type: web
     name: rpms-backend
     runtime: docker
@@ -14,31 +10,20 @@ services:
     plan: free
     healthCheckPath: /api/health
     envVars:
-      - key: PORT
-        value: "8080"
-
       - key: DB_HOST
         sync: false
-
       - key: DB_PORT
         value: "22608"
-
       - key: DB_NAME
         value: kiran_academy_rpms_migration
-
       - key: DB_USERNAME
         sync: false
-
       - key: DB_PASSWORD
         sync: false
-
       - key: CORS_ALLOWED_ORIGINS
         sync: false
 
-      - key: DB_SSL_MODE
-        value: REQUIRED
-
-  # Frontend Static Site
+  # Static Frontend
   - type: web
     name: rpms-frontend
     runtime: static
@@ -46,4 +31,4 @@ services:
     routes:
       - type: redirect
         source: /
-        destination: /login.html
+        destination: /login.html      
